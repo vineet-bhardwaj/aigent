@@ -27,6 +27,10 @@ const REPORTS = {
     user: process.env.REPORT_KATHRYN_USER || 'allstate',
     pass: process.env.REPORT_KATHRYN_PASS || 'midscore-example',
   },
+  'jose-de-santiago': {
+    user: process.env.REPORT_JOSE_USER || 'allstate',
+    pass: process.env.REPORT_JOSE_PASS || 'lowscore-example',
+  },
 };
 
 export const config = {

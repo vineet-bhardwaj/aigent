@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>AIgent Impact Report — Jose De Santiago · Middle-Low Tier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F9FE;
+    --bg-alt: #EEF3FD;
+    --surface: #FFFFFF;
+    --ink: #08163B;
+    --ink-soft: #3A4A72;
+    --ink-mute: #6B7AA0;
+    --navy: #01267C;
+    --navy-deep: #0A1E5E;
+    --azure: #4B8DFA;
+    --azure-600: #2E6FF2;
+    --azure-400: #6FA6FB;
+    --coral: #DE7D6C;
+    --coral-soft: rgba(222, 125, 108, 0.13);
+    --gold: #F2A33C;
+    --gold-soft: rgba(242, 163, 60, 0.14);
+    --green: #1FB97A;
+    --green-soft: rgba(31, 185, 122, 0.14);
+    --red: #EF5A6F;
+    --red-soft: rgba(239, 90, 111, 0.13);
+    --border: #E1E8F5;
+    --border-soft: #EEF3FD;
+    --shadow: 0 1px 3px rgba(8,22,59,0.06), 0 12px 30px -12px rgba(8,22,59,0.16);
+    --display: 'Plus Jakarta Sans', system-ui, sans-serif;
+    --body: 'Plus Jakarta Sans', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .container { max-width: 1000px; margin: 0 auto; padding: 0 32px; }
+
+  /* ========== DATA TAGS ========== */
+  .illus-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8A6420;
+    background: var(--gold-soft);
+    border: 1px solid rgba(242,163,60,0.4);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-weight: 600;
+    vertical-align: middle;
+  }
+  .verified-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green);
+    background: var(--green-soft);
+    border: 1px solid rgba(31,185,122,0.4);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-weight: 600;
+    vertical-align: middle;
+  }
+
+  /* ========== COVER ========== */
+  .cover {
+    padding: 56px 0 44px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .cover::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--navy) 0%, var(--azure) 100%);
+  }
+  .brand-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    gap: 16px;
+  }
+  .wordmark {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 26px;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .wordmark .ai { color: var(--navy); font-style: italic; }
+  .wordmark .rest { color: var(--azure); }
+  .brand-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: right;
+    line-height: 1.4;
+  }
+  .brand-date .lbl { color: var(--azure-600); font-weight: 600; display: block; font-size: 10px; }
+  .brand-date .val { color: var(--ink); font-weight: 600; }
+  .cover-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .report-label { color: var(--coral); font-weight: 600; }
+  .cover-title {
+    font-family: var(--display);
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .cover-subtitle {
+    font-size: 17px;
+    color: var(--ink-mute);
+    margin-bottom: 32px;
+  }
+
+  /* ========== HERO SCORECARD ========== */
+  .hero-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+  }
+  .hero-score-side {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+    padding: 36px 28px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .tier-pill {
+    display: inline-block;
+    padding: 6px 14px;
+    background: var(--green);
+    color: white;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: 100px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .big-score {
+    font-family: var(--display);
+    font-size: 96px;
+    font-weight: 700;
+    line-height: 1;
+    color: white;
+    letter-spacing: -0.04em;
+  }
+  .big-score .total {
+    font-size: 26px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+  }
+  .score-lbl {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-top: 6px;
+  }
+  .hero-detail-side {
+    padding: 32px 36px;
+  }
+  .verdict-headline {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--navy-deep);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .verdict-sub {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-mute);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .hstat {
+    padding: 10px 12px;
+    background: var(--bg);
+    border-radius: 8px;
+    border-left: 3px solid var(--green);
+  }
+  .hstat .hsv {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--navy-deep);
+    line-height: 1;
+  }
+  .hstat .hsl {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-mute);
+    margin-top: 6px;
+  }
+  .verdict-msg {
+    padding: 14px 18px;
+    background: var(--green-soft);
+    border-radius: 8px;
+    border-left: 3px solid var(--green);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  /* ========== SECTION COMMON ========== */
+  section { padding: 56px 0; border-bottom: 1px solid var(--border); }
+  section.alt { background: var(--bg-alt); }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--azure-600);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-family: var(--display);
+    font-size: clamp(26px, 3.5vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--navy);
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+  h2 em { font-style: italic; color: var(--azure-600); font-weight: 700; }
+  .section-lede {
+    font-size: 16px;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    max-width: 720px;
+    line-height: 1.6;
+  }
+  h3 {
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--navy-deep);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  p { color: var(--ink); margin-bottom: 14px; max-width: 720px; }
+  strong { color: var(--navy-deep); font-weight: 600; }
+
+  /* ========== AI ENGINE RANKINGS ========== */
+  .engines-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin: 24px 0;
+  }
+  .engine-card {
+    background: white;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s;
+  }
+  .engine-card:hover { transform: translateY(-2px); }
+  .engine-header {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--border-soft);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .engine-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+  }
+  .engine-card.chatgpt .engine-dot { background: #10A37F; }
+  .engine-card.gemini .engine-dot { background: #4285F4; }
+  .engine-card.perplexity .engine-dot { background: #20808D; }
+  .engine-card.claude .engine-dot { background: #C97757; }
+  .engine-name {
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy-deep);
+  }
+  .engine-body {
+    padding: 18px;
+  }
+  .engine-rank-display {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .rank-big {
+    font-family: var(--display);
+    font-size: 44px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--navy);
+    letter-spacing: -0.04em;
+  }
+  .rank-suffix {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+  .engine-metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: 12px;
+  }
+  .engine-metric-row:last-child { border-bottom: none; }
+  .em-label { color: var(--ink-mute); }
+  .em-value {
+    font-family: var(--mono);
+    color: var(--navy-deep);
+    font-weight: 600;
+  }
+  .engine-trend {
+    margin-top: 12px;
+    padding: 8px 12px;
+    background: var(--bg);
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: var(--mono);
+    color: var(--ink-mute);
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .engine-trend.zero { background: var(--red-soft); color: var(--red); }
+  .engine-trend.partial { background: var(--gold-soft); color: #8A6420; }
+  .rank-big.none { color: var(--red); }
+  .engine-card.not-tested { opacity: 0.72; }
+  .engine-card.not-tested .rank-big { color: var(--ink-mute); font-size: 30px; }
+  .not-tested-note {
+    font-size: 12px;
+    color: var(--ink-mute);
+    font-family: var(--mono);
+    line-height: 1.5;
+  }
+  .finding-banner {
+    background: linear-gradient(135deg, #7A1020 0%, #B23A4A 100%);
+    border-radius: 14px;
+    padding: 24px 28px;
+    color: #fff;
+    margin: 24px 0 8px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 22px;
+    align-items: center;
+  }
+  .finding-banner .fb-num {
+    font-family: var(--display);
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: #fff;
+    white-space: nowrap;
+  }
+  .finding-banner .fb-num small {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-top: 6px;
+  }
+  .finding-banner .fb-text strong {
+    display: block;
+    font-family: var(--display);
+    font-size: 19px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .finding-banner .fb-text p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.55;
+    margin: 0;
+    max-width: none;
+  }
+  @media (max-width: 820px) {
+    .finding-banner { grid-template-columns: 1fr; gap: 12px; }
+  }
+
+  /* ========== INDEX SUMMARY ========== */
+  .index-summary {
+    background: white;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 28px;
+    align-items: center;
+  }
+  .index-icon {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--azure) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: var(--display);
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .index-text strong {
+    display: block;
+    font-family: var(--display);
+    font-size: 18px;
+    color: var(--navy-deep);
+    margin-bottom: 4px;
+  }
+  .index-text span {
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .index-score {
+    font-family: var(--display);
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1;
+    letter-spacing: -0.035em;
+  }
+
+  /* ========== PERFORMING PROMPTS SECTION ========== */
+  .prompt-stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .pstat {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 18px 20px;
+    text-align: center;
+  }
+  .pstat-val {
+    font-family: var(--display);
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--navy);
+    letter-spacing: -0.04em;
+  }
+  .pstat-lbl {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 8px;
+  }
+  .prompts-table-wrap,
+  .opportunity-wrap {
+    background: white;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin: 20px 0;
+  }
+  .prompts-table-header,
+  .opportunity-header {
+    padding: 18px 24px;
+    background: var(--navy-deep);
+    color: white;
+  }
+  .opportunity-header { background: linear-gradient(135deg, var(--coral) 0%, #B85C49 100%); }
+  .prompts-table-header h3,
+  .opportunity-header h3 {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 4px;
+    font-family: var(--display);
+    font-weight: 600;
+  }
+  .prompts-table-header p,
+  .opportunity-header p {
+    color: rgba(255,255,255,0.75);
+    font-size: 13px;
+    margin: 0;
+    max-width: none;
+  }
+  .prompts-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .prompts-table thead th {
+    background: var(--bg);
+    padding: 12px 14px;
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-mute);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+  }
+  .prompts-table tbody td {
+    padding: 14px;
+    border-bottom: 1px solid var(--border-soft);
+    vertical-align: middle;
+  }
+  .prompts-table tbody tr:last-child td { border-bottom: none; }
+  .prompts-table tbody tr:hover { background: var(--bg); }
+  .prompt-cell {
+    color: var(--ink);
+    font-weight: 500;
+    max-width: 280px;
+    line-height: 1.4;
+  }
+  .engine-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .engine-tag.chatgpt { background: #DDF5EC; color: #10A37F; }
+  .engine-tag.gemini { background: #DDE7FA; color: #4285F4; }
+  .engine-tag.perplexity { background: #D8EBED; color: #20808D; }
+  .engine-tag.claude { background: #F4E3D9; color: #C97757; }
+  .status-pill {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+  .status-pill.mentioned { background: var(--green-soft); color: var(--green); }
+  .status-pill.not-mentioned { background: var(--red-soft); color: var(--red); }
+  .status-pill.pending { background: var(--gold-soft); color: #8A6420; }
+  .position-pill {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 50%;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .position-pill.rank-1 { background: var(--green); color: white; }
+  .position-pill.rank-2 { background: var(--gold); color: white; }
+  .position-pill.rank-3 { background: var(--coral); color: white; }
+  .position-pill.rank-none { background: var(--bg); color: var(--ink-mute); }
+  .cite-yes { color: var(--green); font-weight: 600; font-family: var(--mono); font-size: 12px; }
+  .cite-no { color: var(--ink-mute); font-family: var(--mono); font-size: 12px; }
+  .competitors-cell {
+    color: var(--ink-soft);
+    font-size: 12px;
+    font-style: italic;
+  }
+  .volume-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+  .volume-tag.high { background: var(--red-soft); color: var(--red); }
+  .volume-tag.medium { background: #FBF3E0; color: #8A6420; }
+  .volume-tag.low { background: var(--bg); color: var(--ink-mute); }
+  .opportunity-reason {
+    color: var(--ink-soft);
+    font-size: 12px;
+  }
+
+  /* ========== CATEGORY BREAKDOWN ========== */
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .cat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 22px 24px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .cat-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+  .cat-card.visibility::before { background: var(--navy); }
+  .cat-card.reputation::before { background: var(--azure-400); }
+  .cat-card.engagement::before { background: var(--coral); }
+  .cat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .cat-name {
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy-deep);
+  }
+  .cat-weight {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-mute);
+    padding: 2px 8px;
+    background: var(--bg);
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .cat-score-display {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .cat-score {
+    font-family: var(--display);
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .cat-card.visibility .cat-score { color: var(--navy); }
+  .cat-card.reputation .cat-score { color: var(--azure-600); }
+  .cat-card.engagement .cat-score { color: var(--coral); }
+  .cat-max {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-mute);
+  }
+  .cat-progress {
+    height: 6px;
+    background: var(--bg);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .cat-progress-bar { height: 100%; border-radius: 3px; }
+  .cat-card.visibility .cat-progress-bar { background: var(--navy); }
+  .cat-card.reputation .cat-progress-bar { background: var(--azure-400); }
+  .cat-card.engagement .cat-progress-bar { background: var(--coral); }
+  .cat-desc {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  /* ========== COMPETITOR TABLE ========== */
+  .compete-table-wrap {
+    background: white;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin: 20px 0;
+  }
+  .compete-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .compete-table thead th {
+    background: var(--navy-deep);
+    color: white;
+    padding: 14px 16px;
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .compete-table tbody td {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-soft);
+    vertical-align: middle;
+  }
+  .compete-table tbody tr:last-child td { border-bottom: none; }
+  .compete-table .rank-cell {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--navy);
+    width: 60px;
+  }
+  .compete-table .you-row {
+    background: linear-gradient(90deg, rgba(31,185,122,0.10) 0%, rgba(31,185,122,0.02) 100%);
+  }
+  .compete-table .you-row .rank-cell { color: var(--green); }
+  .agent-cell strong {
+    display: block;
+    font-size: 15px;
+    color: var(--navy-deep);
+    margin-bottom: 2px;
+  }
+  .agent-cell small {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .carrier-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+  .carrier-tag.allstate { background: #DCE6F8; color: var(--navy); }
+  .carrier-tag.statefarm { background: var(--red-soft); color: var(--red); }
+  .carrier-tag.indep { background: var(--bg-alt); color: var(--ink-soft); }
+  .score-now {
+    font-family: var(--mono);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy-deep);
+  }
+
+  /* ========== ACTION PLAN BY CATEGORY ========== */
+  .action-category {
+    background: white;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .action-cat-header {
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+  }
+  .action-cat-header.visibility { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%); }
+  .action-cat-header.reputation { background: linear-gradient(135deg, var(--azure-600) 0%, var(--azure-400) 100%); }
+  .action-cat-header.engagement { background: linear-gradient(135deg, var(--coral) 0%, #C76755 100%); }
+  .action-cat-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .action-cat-badge {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .action-cat-name {
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .action-cat-name small {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    font-weight: 400;
+    margin-top: 2px;
+  }
+  .action-cat-score {
+    font-family: var(--display);
+    font-size: 26px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.02em;
+  }
+  .action-cat-score small {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 500;
+  }
+  .action-list {
+    padding: 8px 0;
+  }
+  .action-row {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border-soft);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: start;
+  }
+  .action-row:last-child { border-bottom: none; }
+  .action-text h4 {
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy-deep);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .action-text p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0 0 8px;
+    line-height: 1.55;
+    max-width: none;
+  }
+  .action-impact {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-mute);
+    padding: 2px 8px;
+    background: var(--bg);
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+  .action-impact strong {
+    color: var(--navy-deep);
+    font-weight: 700;
+  }
+  .impact-target {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 2px 9px;
+    background: var(--green-soft);
+    color: #0A6B43;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .impact-target .arrow { color: var(--ink-mute); margin: 0 3px; }
+  .action-meta {
+    text-align: right;
+    min-width: 110px;
+  }
+  .timeframe-pill {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .tf-urgent { background: var(--red-soft); color: var(--red); }
+  .tf-medium { background: #FBF3E0; color: #8A6420; }
+  .tf-short { background: var(--green-soft); color: var(--green); }
+  .effort {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-mute);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ========== LOCAL BUSINESS OPPORTUNITIES ========== */
+  .opp-intro {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+    border-radius: 16px;
+    padding: 28px 32px;
+    color: white;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: center;
+  }
+  .opp-intro-text h3 {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: white;
+    margin-bottom: 8px;
+  }
+  .opp-intro-text p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.6;
+    max-width: 560px;
+    margin: 0;
+  }
+  .opp-intro-stat {
+    text-align: center;
+    white-space: nowrap;
+  }
+  .opp-intro-stat .big-num {
+    font-family: var(--display);
+    font-size: 56px;
+    font-weight: 800;
+    color: var(--coral);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .opp-intro-stat .big-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+  .opp-table-wrap {
+    background: white;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin: 20px 0;
+  }
+  .opp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .opp-table thead th {
+    background: var(--navy-deep);
+    color: white;
+    padding: 13px 16px;
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .opp-table thead th.col-dist { text-align: right; white-space: nowrap; }
+  .opp-table tbody td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border-soft);
+    vertical-align: top;
+  }
+  .opp-table tbody tr:last-child td { border-bottom: none; }
+  .opp-table tbody tr:nth-child(even) { background: var(--bg); }
+  .opp-biz strong {
+    display: block;
+    font-size: 15px;
+    color: var(--navy);
+    font-weight: 700;
+    margin-bottom: 3px;
+    letter-spacing: -0.01em;
+  }
+  .opp-biz .opp-cat {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .opp-person strong {
+    display: block;
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .opp-person .opp-title {
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .opp-phone {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--navy);
+    white-space: nowrap;
+  }
+  .opp-addr {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+    max-width: 220px;
+  }
+  .opp-dist {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--coral);
+    text-align: right;
+    white-space: nowrap;
+  }
+  .opp-how-box {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    margin-top: 20px;
+  }
+  .opp-how-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--azure-600);
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .opp-how-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .opp-how-step {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .opp-step-num {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--coral);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    flex-shrink: 0;
+    margin-top: -2px;
+  }
+  .opp-step-text {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .opp-step-text strong {
+    display: block;
+    color: var(--navy);
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+  @media (max-width: 820px) {
+    .opp-intro { grid-template-columns: 1fr; }
+    .opp-intro-stat { text-align: left; }
+    .opp-table { font-size: 12px; }
+    .opp-table thead th, .opp-table tbody td { padding: 10px 10px; }
+    .opp-addr { max-width: none; }
+    .opp-how-steps { grid-template-columns: 1fr; }
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    padding: 36px 0;
+    background: var(--navy-deep);
+    color: #C5BCA8;
+    text-align: center;
+  }
+  footer .container { max-width: 720px; }
+  footer .ftitle {
+    font-family: var(--display);
+    font-size: 22px;
+    color: white;
+    font-style: italic;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  footer p {
+    color: #C5BCA8;
+    font-size: 13px;
+    margin: 0 auto 4px;
+    max-width: none;
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 820px) {
+    .container { padding: 0 20px; }
+    .hero-card { grid-template-columns: 1fr; }
+    .hero-score-side { padding: 28px 20px; }
+    .big-score { font-size: 72px; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .engines-grid { grid-template-columns: repeat(2, 1fr); }
+    .category-grid { grid-template-columns: 1fr; }
+    .index-summary { grid-template-columns: 1fr; text-align: center; gap: 16px; }
+    .compete-table { font-size: 12px; }
+    .compete-table thead th, .compete-table tbody td { padding: 10px 8px; }
+    .action-row { grid-template-columns: 1fr; }
+    .action-meta { text-align: left; min-width: 0; }
+    .prompt-stats-row { grid-template-columns: repeat(2, 1fr); }
+    .prompts-table { font-size: 11px; }
+    .prompts-table thead th, .prompts-table tbody td { padding: 10px 8px; }
+    .prompt-cell { max-width: 140px; font-size: 11px; }
+    section { padding: 40px 0; }
+    .cover { padding: 32px 0; }
+  }
+  @media print {
+    section { page-break-inside: avoid; padding: 32px 0; }
+    .engine-card, .cat-card, .action-category, .compete-table-wrap, .prompts-table-wrap, .opportunity-wrap { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== ACCEPT-TO-ENTER GATE ========== -->
+<div id="consent-gate" role="dialog" aria-modal="true" aria-labelledby="consent-title" style="position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#01267C 0%,#0A1E5E 100%);display:flex;align-items:center;justify-content:center;padding:24px;">
+  <div style="position:absolute;top:-15%;left:50%;transform:translateX(-50%);width:900px;height:600px;pointer-events:none;background:radial-gradient(ellipse at center, rgba(75,141,250,0.30), transparent 65%);"></div>
+  <div style="position:relative;width:100%;max-width:460px;background:#fff;border-radius:18px;box-shadow:0 30px 80px -20px rgba(8,22,59,0.55);padding:38px 36px 32px;text-align:center;">
+    <div style="font-family:var(--display);font-size:30px;line-height:1;margin-bottom:22px;letter-spacing:-0.04em;">
+      <span style="color:#01267C;font-style:italic;font-weight:800;">AI</span><span style="color:#4B8DFA;font-weight:800;">gent&nbsp;Impact</span>
+    </div>
+    <h2 id="consent-title" style="font-family:var(--display);font-size:22px;font-weight:800;letter-spacing:-0.02em;color:#08163B;margin:0 0 12px;">Before you continue</h2>
+    <p style="font-size:14.5px;line-height:1.6;color:#3A4A72;margin:0 0 26px;">These web pages, systems and business logic are the Intellectual Property of Xeno Media Inc. and are confidential. Access is provided for the intended recipients only for evaluation and discussion. Any other use is strictly prohibited.</p>
+    <button type="button" onclick="document.getElementById('consent-gate').remove();document.body.style.overflow='';" style="width:100%;display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--display);font-size:16px;font-weight:600;padding:15px 26px;border:none;border-radius:12px;cursor:pointer;color:#fff;background-color:#DE7D6C;">Accept &amp; Continue</button>
+    <a href="https://www.google.com" style="display:inline-block;margin-top:16px;font-size:13px;font-weight:500;color:#6B7AA0;text-decoration:none;">Decline and leave</a>
+  </div>
+</div>
+<script>document.body.style.overflow='hidden';</script>
+
+<!-- ========== CONFIDENTIAL STATUS BAR ========== -->
+<div role="note" style="position:sticky;top:0;z-index:200;width:100%;background:linear-gradient(135deg,#01267C 0%,#0A1E5E 100%);color:#fff;text-align:center;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;line-height:1.4;padding:8px 16px;border-bottom:1px solid rgba(255,255,255,0.12);">
+  Confidential — for use in discussions with Xeno Media only. Sharing of this material is strictly prohibited.
+</div>
+
+<!-- ========== COVER ========== -->
+<section class="cover">
+  <div class="container">
+    <div class="brand-row">
+      <div class="wordmark"><span class="ai">AI</span><span class="rest">gent Impact</span></div>
+      <div class="brand-date">
+        <span class="lbl">Report Generated</span>
+        <span class="val">June 22, 2026</span>
+      </div>
+    </div>
+    <div class="cover-meta">
+      <span class="report-label">Monthly Report · Middle-Low Tier</span>
+      <span>June 2026 · Baseline Measurement</span>
+    </div>
+    <h1 class="cover-title">Jose De Santiago</h1>
+    <p class="cover-subtitle">Allstate Insurance · 1613 S Halsted St, Chicago, IL 60608 (Pilsen) <span class="verified-tag">Verified</span></p>
+
+    <!-- Hero Scorecard -->
+    <div class="hero-card">
+      <div class="hero-score-side">
+        <span class="tier-pill" style="background: var(--coral);">⚠ Middle-Low Tier</span>
+        <div class="big-score">28<span class="total">/100</span></div>
+        <div class="score-lbl">AIgent Impact Score · Measured</div>
+      </div>
+      <div class="hero-detail-side">
+        <div class="verdict-headline">Invisible in AI search, with foundational gaps to fix.</div>
+        <div class="verdict-sub">Score 28 / 100 · 0 neutral AI appearances · split listings, generic bio, sub-4.0 rating</div>
+
+        <div class="hero-stats">
+          <div class="hstat" style="border-left-color: var(--gold);">
+            <div class="hsv">3.9★</div>
+            <div class="hsl">Google Rating · Verified</div>
+          </div>
+          <div class="hstat" style="border-left-color: var(--gold);">
+            <div class="hsv">42</div>
+            <div class="hsl">Google Reviews · Verified</div>
+          </div>
+          <div class="hstat" style="border-left-color: var(--red);">
+            <div class="hsv">2 pages</div>
+            <div class="hsl">Split Allstate Listings</div>
+          </div>
+          <div class="hstat" style="border-left-color: var(--red);">
+            <div class="hsv">0%</div>
+            <div class="hsl">Neutral AI Visibility</div>
+          </div>
+        </div>
+
+        <div class="verdict-msg">
+          <strong style="color: var(--coral);">What's verified:</strong> In live testing across ChatGPT, Gemini, and Claude, Jose De Santiago appeared in <strong>none</strong> of the 11 neutral local searches — Pilsen consumers are pointed to independents and other captive agents instead. He is only returned when searched by name, and even then the engines disagree on his phone number because Allstate hosts two separate pages for his office. With a 3.9★ rating on 42 reviews and a generic bio, this is a foundational-stage profile — the report maps the specific fixes to climb out of it.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 1: AI ENGINE RANKINGS ========== -->
+<section>
+  <div class="container">
+    <div class="section-num">01 · AIgent Impact Ranking on Key AI Engines</div>
+    <h2>How you <em>rank across each AI engine</em> <span class="verified-tag">Measured</span></h2>
+    <p class="section-lede"><strong>First measurement — baseline.</strong> We ran an 11-prompt corpus on each of three engines (ChatGPT, Gemini, Claude) on June 22, 2026. The finding is unambiguous: in neutral local searches — the way a real Pilsen consumer asks, without naming you — you never appear. Not once, on any engine. You are returned only when someone already knows your name. Perplexity was not part of this run.</p>
+
+    <div class="finding-banner">
+      <div class="fb-num">0<small>of 11 neutral prompts</small></div>
+      <div class="fb-text">
+        <strong>You surfaced in 0 of 11 neutral local searches, across all three engines combined.</strong>
+        <p>On every neutral Pilsen prompt — best agent, auto, home, first-time buyers, 60608, affordable, compare — all three engines recommended other agencies: independents like Sharon Robles, Illinois Vehicle (Xpert), Cresco and Melendez, plus other captive agents (Elvia Solis State Farm, Farmers' Jose Perez, and even other Allstate agents like Sergio De La Torre). You were named only in the direct by-name lookup. When that happened, the engines disagreed on your phone number — a direct symptom of the two split Allstate listings for your office.</p>
+      </div>
+    </div>
+
+    <div class="engines-grid">
+      <!-- ChatGPT -->
+      <div class="engine-card chatgpt">
+        <div class="engine-header">
+          <div class="engine-dot"></div>
+          <div class="engine-name">ChatGPT</div>
+        </div>
+        <div class="engine-body">
+          <div class="engine-rank-display">
+            <div class="rank-big none">0</div>
+            <div class="rank-suffix">neutral surfaces</div>
+          </div>
+          <div class="engine-metric-row">
+            <span class="em-label">Neutral appearance</span>
+            <span class="em-value">0 / 11</span>
+          </div>
+          <div class="engine-metric-row">
+            <span class="em-label">Named lookup</span>
+            <span class="em-value">Found ✓</span>
+          </div>
+          <div class="engine-metric-row">
+            <span class="em-label">Cited your pages</span>
+            <span class="em-value">Name search only</span>
+          </div>
+          <div class="engine-trend zero">
+            <span>Not surfacing</span>
+            <span>neutral 0/11</span>
+          </div>
+        </div>
+      </div>
+      <!-- Gemini -->
+      <div class="engine-card gemini">
+        <div class="engine-header">
+          <div class="engine-dot"></div>
+          <div class="engine-name">Gemini</div>
+        </div>
+        <div class="engine-body">
+          <div class="engine-rank-display">
+            <div class="rank-big none">0</div>
+            <div class="rank-suffix">neutral surfaces</div>
+          </div>
+          <div class="engine-metric-row">
+            <span class="em-label">Neutral appearance</span>
+            <span class="em-value">0 / 11</span>
+          </div>
+          <div class="engine-metric-row">
+            <span class="em-label">Named lookup</span>
+            <span class="em-value">Found ✓</span>
+          </div>
+          <div class="engine-metric-row">
+            <span class="em-label">Cited your pages</span>
+            <span class="em-value">Name search only</span>
+          </div>
+          <div class="engine-trend zero">
+            <span>Not surfacing</span>
+            <span>neutral 0/11</span>
+          </div>
+        </div>
+      </div>
+      <!-- Claude -->
+      <div class="engine-card claude">
+        <div class="engine-header">
+          <div class="engine-dot"></div>
+          <div class="engine-name">Claude</div>
+        </div>
+        <div class="engine-body">
+          <div class="engine-rank-display">
+            <div class="rank-big none">0</div>
+            <div class="rank-suffix">neutral surfaces</div>
+          </div>
+          <div class="engine-metric-row">
+            <span class="em-label">Neutral appearance</span>
+            <span class="em-value">0 / 11</span>
+          </div>
+          <div class="engine-metric-row">
+            <span class="em-label">Named lookup</span>
+            <span class="em-value">Found ✓</span>
+          </div>
+          <div class="engine-metric-row">
+            <span class="em-label">Cited your pages</span>
+            <span class="em-value">Name search only</span>
+          </div>
+          <div class="engine-trend zero">
+            <span>Not surfacing</span>
+            <span>neutral 0/11</span>
+          </div>
+        </div>
+      </div>
+      <!-- Perplexity (not tested) -->
+      <div class="engine-card perplexity not-tested">
+        <div class="engine-header">
+          <div class="engine-dot"></div>
+          <div class="engine-name">Perplexity</div>
+        </div>
+        <div class="engine-body">
+          <div class="engine-rank-display">
+            <div class="rank-big">—</div>
+            <div class="rank-suffix">not tested</div>
+          </div>
+          <p class="not-tested-note">Not included in this run. Add Perplexity to the next measurement for full four-engine coverage.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="index-summary">
+      <div class="index-icon" style="background: linear-gradient(135deg, #7A1020 0%, #B23A4A 100%);">!</div>
+      <div class="index-text">
+        <strong>Composite AI Visibility — Neutral Discovery <span class="verified-tag">Measured</span></strong>
+        <span>Across the three tested engines, you appeared in 0 of 33 neutral prompt-runs (0%). This is the baseline the action plan is built to move. A score is not assigned this month because a single measurement has no trend to anchor it.</span>
+      </div>
+      <div class="index-score" style="color: var(--red);">0%</div>
+    </div>
+
+    <p style="margin-top: 18px; font-size: 13px; color: var(--ink-soft);"><strong>How to read this:</strong> zero neutral visibility is the problem the service exists to fix. But Jose's case has an added wrinkle the named-lookup exposed: the engines don't even agree on his phone number — ChatGPT and Claude returned (312) 850-0775 while Gemini returned (773) 292-2300 — because Allstate hosts two separate pages for his office, each with a different number and its own pile of reviews. So the work here is twofold: surface him in neutral search at all, and first clean up the split, conflicting information the engines are reading.</p>
+  </div>
+</section>
+
+<!-- ========== SECTION 2: PERFORMING PROMPTS ========== -->
+<section class="alt">
+  <div class="container">
+    <div class="section-num">02 · Your Performing Prompts</div>
+    <h2>What the engines <em>said instead of you</em> <span class="verified-tag">Measured · Jun 22 2026</span></h2>
+    <p class="section-lede"><strong>This is the ground truth behind the visibility finding.</strong> Below is every neutral prompt we ran across ChatGPT, Gemini, and Claude, with which agencies the engine recommended in your place. You did not appear in any of the 11. The by-name lookup is shown separately — all three engines return you there, but disagree on your phone number, which is the split-listing problem showing through.</p>
+
+    <div class="prompt-stats-row">
+      <div class="pstat">
+        <div class="pstat-val">11</div>
+        <div class="pstat-lbl">Neutral Prompts</div>
+      </div>
+      <div class="pstat">
+        <div class="pstat-val" style="color: var(--red);">0</div>
+        <div class="pstat-lbl">You Appeared In</div>
+      </div>
+      <div class="pstat">
+        <div class="pstat-val" style="color: var(--red);">0</div>
+        <div class="pstat-lbl">Cited / Linked</div>
+      </div>
+      <div class="pstat">
+        <div class="pstat-val">3</div>
+        <div class="pstat-lbl">Engines Tested</div>
+      </div>
+    </div>
+
+    <div class="prompts-table-wrap">
+      <div class="prompts-table-header">
+        <h3>Neutral prompt results — who surfaced</h3>
+        <p>11 neutral Pilsen / Chicago prompts × 3 engines. "Recommended instead" lists the agencies the engines actually named.</p>
+      </div>
+      <table class="prompts-table">
+        <thead>
+          <tr>
+            <th>Prompt</th>
+            <th>Engine</th>
+            <th>You Appeared</th>
+            <th>Position</th>
+            <th>Recommended Instead</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="prompt-cell">Best insurance agent in Pilsen / Chicago</td>
+            <td><span class="engine-tag chatgpt">ChatGPT</span> <span class="engine-tag gemini">Gemini</span> <span class="engine-tag claude">Claude</span></td>
+            <td><span class="status-pill not-mentioned">No</span></td>
+            <td><span class="position-pill rank-none">—</span></td>
+            <td class="competitors-cell">Sharon Robles, Magnum, Illinois Vehicle (Xpert), Jos. Cacciatore, Sylvia Torres Underhill (State Farm)</td>
+          </tr>
+          <tr>
+            <td class="prompt-cell">Top auto insurance agent in Pilsen / Chicago</td>
+            <td><span class="engine-tag chatgpt">ChatGPT</span> <span class="engine-tag gemini">Gemini</span> <span class="engine-tag claude">Claude</span></td>
+            <td><span class="status-pill not-mentioned">No</span></td>
+            <td><span class="position-pill rank-none">—</span></td>
+            <td class="competitors-cell">Sharon Robles, Magnum, Julia Skuibida (Am. Family), Illinois Vehicle, Acceptance, Sylvia Torres Underhill (SF)</td>
+          </tr>
+          <tr>
+            <td class="prompt-cell">Top rated insurance agencies in Pilsen</td>
+            <td><span class="engine-tag chatgpt">ChatGPT</span> <span class="engine-tag gemini">Gemini</span> <span class="engine-tag claude">Claude</span></td>
+            <td><span class="status-pill not-mentioned">No</span></td>
+            <td><span class="position-pill rank-none">—</span></td>
+            <td class="competitors-cell">Elvia Solis (SF), Illinois Vehicle, Perez (Farmers), Sharon Robles, Magnum, Drew Karis (SF)</td>
+          </tr>
+          <tr>
+            <td class="prompt-cell">Best home insurance agent near Pilsen</td>
+            <td><span class="engine-tag chatgpt">ChatGPT</span> <span class="engine-tag gemini">Gemini</span> <span class="engine-tag claude">Claude</span></td>
+            <td><span class="status-pill not-mentioned">No</span></td>
+            <td><span class="position-pill rank-none">—</span></td>
+            <td class="competitors-cell">Sharon Robles, Cresco, Six Corners, Elvia Solis (SF), Perez (Farmers), Magnum</td>
+          </tr>
+          <tr>
+            <td class="prompt-cell">Recommend a local insurance agent in 60608</td>
+            <td><span class="engine-tag chatgpt">ChatGPT</span> <span class="engine-tag gemini">Gemini</span> <span class="engine-tag claude">Claude</span></td>
+            <td><span class="status-pill not-mentioned">No</span></td>
+            <td><span class="position-pill rank-none">—</span></td>
+            <td class="competitors-cell">Elvia Solis (SF), Sharon Robles, Perez (Farmers), Illinois Vehicle, Magnum, Sergio De La Torre (Allstate)</td>
+          </tr>
+          <tr>
+            <td class="prompt-cell">Best Spanish-speaking / military-family agent in Pilsen</td>
+            <td><span class="engine-tag chatgpt">ChatGPT</span> <span class="engine-tag gemini">Gemini</span> <span class="engine-tag claude">Claude</span></td>
+            <td><span class="status-pill not-mentioned">No</span></td>
+            <td><span class="position-pill rank-none">—</span></td>
+            <td class="competitors-cell">Drew Karis (SF), Elvia Solis (SF), Perez (Farmers), GEICO. <strong>Note:</strong> despite your verified Spanish-language capability, you were not named here</td>
+          </tr>
+          <tr>
+            <td class="prompt-cell">Compare insurance agents in Pilsen</td>
+            <td><span class="engine-tag chatgpt">ChatGPT</span> <span class="engine-tag gemini">Gemini</span> <span class="engine-tag claude">Claude</span></td>
+            <td><span class="status-pill not-mentioned">No</span></td>
+            <td><span class="position-pill rank-none">—</span></td>
+            <td class="competitors-cell">Sharon Robles, Perez, Cresco, Magnum, Elvia Solis, Sergio De La Torre (Allstate), Sylvia Torres Underhill (SF)</td>
+          </tr>
+          <tr>
+            <td class="prompt-cell">Local agent for first-time homebuyers in Pilsen</td>
+            <td><span class="engine-tag chatgpt">ChatGPT</span> <span class="engine-tag gemini">Gemini</span> <span class="engine-tag claude">Claude</span></td>
+            <td><span class="status-pill not-mentioned">No</span></td>
+            <td><span class="position-pill rank-none">—</span></td>
+            <td class="competitors-cell">Sharon Robles, Melendez, Cresco, Perez (Farmers), Elvia Solis (SF), Magnum</td>
+          </tr>
+          <tr>
+            <td class="prompt-cell">Affordable car insurance agent in Pilsen</td>
+            <td><span class="engine-tag chatgpt">ChatGPT</span> <span class="engine-tag gemini">Gemini</span> <span class="engine-tag claude">Claude</span></td>
+            <td><span class="status-pill not-mentioned">No</span></td>
+            <td><span class="position-pill rank-none">—</span></td>
+            <td class="competitors-cell">Illinois Vehicle (Xpert), Acceptance, Sharon Robles, Perez, Freeway, Magnum</td>
+          </tr>
+          <tr>
+            <td class="prompt-cell">Who is the best insurance agent in Pilsen</td>
+            <td><span class="engine-tag chatgpt">ChatGPT</span> <span class="engine-tag gemini">Gemini</span> <span class="engine-tag claude">Claude</span></td>
+            <td><span class="status-pill not-mentioned">No</span></td>
+            <td><span class="position-pill rank-none">—</span></td>
+            <td class="competitors-cell">Sharon Robles, Illinois Vehicle, Elvia Solis (SF), Magnum</td>
+          </tr>
+          <tr>
+            <td class="prompt-cell">Car insurance agent in Pilsen / Chicago</td>
+            <td><span class="engine-tag chatgpt">ChatGPT</span> <span class="engine-tag gemini">Gemini</span> <span class="engine-tag claude">Claude</span></td>
+            <td><span class="status-pill not-mentioned">No</span></td>
+            <td><span class="position-pill rank-none">—</span></td>
+            <td class="competitors-cell">Sharon Robles, Illinois Vehicle, Elvia Solis (SF), Magnum, Freeway, Cresco, Acceptance</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin: 18px 0 10px; font-size: 14px; color: var(--ink-soft);"><strong>The only prompt that found you — by name.</strong> And even then, the engines split on your phone number:</p>
+
+    <div class="prompts-table-wrap">
+      <table class="prompts-table">
+        <thead>
+          <tr>
+            <th>Prompt (names you directly)</th>
+            <th>Engine</th>
+            <th>Returned You</th>
+            <th>Detail accuracy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="prompt-cell">Best car insurance agent in Chicago, IL Jose De Santiago</td>
+            <td><span class="engine-tag chatgpt">ChatGPT</span></td>
+            <td><span class="status-pill mentioned">Yes</span></td>
+            <td class="competitors-cell">Correct address; gave phone as <strong>(312) 850-0775</strong>; noted bilingual service &amp; Pilsen/Little Village service area</td>
+          </tr>
+          <tr>
+            <td class="prompt-cell">Best car insurance agent in Chicago, IL Jose De Santiago</td>
+            <td><span class="engine-tag gemini">Gemini</span></td>
+            <td><span class="status-pill mentioned">Yes</span></td>
+            <td class="competitors-cell">Correct address; gave phone as <strong>(773) 292-2300</strong> — <span style="color: var(--red); font-weight: 600;">different number than ChatGPT/Claude</span>; added unverifiable "Drivewise up to 40%" sales detail</td>
+          </tr>
+          <tr>
+            <td class="prompt-cell">Best car insurance agent in Chicago, IL Jose De Santiago</td>
+            <td><span class="engine-tag claude">Claude</span></td>
+            <td><span class="status-pill mentioned">Yes</span></td>
+            <td class="competitors-cell">Correct address &amp; phone <strong>(312) 850-0775</strong>; surfaced a negative review theme (slow email response; "inherited agent") and noted thin review volume</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="opportunity-wrap">
+      <div class="opportunity-header">
+        <h3>Priority prompt targets</h3>
+        <p>Every neutral prompt is currently a miss — these are the ones we'd suggest winning first, based on who's beating you and why. Priority is a recommendation, not a measured search-volume figure</p>
+      </div>
+      <table class="prompts-table opportunity-table">
+        <thead>
+          <tr>
+            <th>Prompt</th>
+            <th>Who wins it now</th>
+            <th>Suggested priority</th>
+            <th>Why you're missing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="prompt-cell">Best Spanish-speaking insurance agent in Pilsen</td>
+            <td class="competitors-cell">Elvia Solis (SF), Perez (Farmers)</td>
+            <td><span class="volume-tag high">Highest</span></td>
+            <td class="opportunity-reason">Pilsen is heavily Spanish-speaking and you offer bilingual service — but it's buried in a structured field, not stated in your bio, so engines don't associate you with this intent</td>
+          </tr>
+          <tr>
+            <td class="prompt-cell">Recommend a local insurance agent in 60608</td>
+            <td class="competitors-cell">Elvia Solis (SF), Sharon Robles, Sergio De La Torre (Allstate)</td>
+            <td><span class="volume-tag high">High</span></td>
+            <td class="opportunity-reason">A ZIP-level query you should be winnable on — another Allstate agent (Sergio De La Torre) surfaces here and you don't</td>
+          </tr>
+          <tr>
+            <td class="prompt-cell">Affordable car insurance agent in Pilsen</td>
+            <td class="competitors-cell">Illinois Vehicle, Acceptance, Freeway</td>
+            <td><span class="volume-tag medium">Medium</span></td>
+            <td class="opportunity-reason">"Affordable" intent — and several of your own reviews complain about price, which works against you here</td>
+          </tr>
+          <tr>
+            <td class="prompt-cell">Best home insurance agent near Pilsen</td>
+            <td class="competitors-cell">Sharon Robles, Cresco, Six Corners</td>
+            <td><span class="volume-tag medium">Medium</span></td>
+            <td class="opportunity-reason">Won by agents whose pages explicitly emphasize homeowners specialization, which yours does not</td>
+          </tr>
+          <tr>
+            <td class="prompt-cell">Best insurance agent in Pilsen / Chicago</td>
+            <td class="competitors-cell">Sharon Robles, Illinois Vehicle, Elvia Solis</td>
+            <td><span class="volume-tag medium">Medium</span></td>
+            <td class="opportunity-reason">The headline query — dominated by very high-review-volume agencies; hardest to win without a much larger, higher-rated review base</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top: 20px; font-size: 14px; color: var(--ink-soft);"><strong>Key takeaway:</strong> the agencies winning these prompts share a pattern — very high public review volume (Illinois Vehicle: 600+; Elvia Solis State Farm: 537; Perez Farmers: 233) at ratings of 4.8–4.9★, and pages that clearly claim local and bilingual intent. Your profile is the opposite on the axes that matter to engines: a 3.9★ rating on 42 reviews, split across two listings, with a generic bio. The single most winnable opening is Spanish-language intent — a real strength of your office that is currently invisible to AI. That's the gap the action plan in Section 05 is built to close.</p>
+    </div>
+</section>
+
+<!-- ========== SECTION 3: CATEGORY SCORES ========== -->
+<section>
+  <div class="container">
+    <div class="section-num">03 · Score by Category</div>
+    <h2>Your <em>28 points</em> broken down <span class="verified-tag">Measured · Jun 2026</span></h2>
+    <p class="section-lede">Your AIgent Impact Score is built from three categories — Visibility (40%), Reputation (35%), and Engagement (25%) — across eight parameters. Every parameter below is scored from verified data: the AI-engine test, your Google profile, your live listings, your allstate.com bio, and award/community records. This is what produces the <strong>28 / 100</strong> on the cover, a Middle-Low result that reflects real, fixable gaps rather than anything about the quality of your service.</p>
+
+    <div class="category-grid">
+      <div class="cat-card visibility">
+        <div class="cat-header">
+          <div class="cat-name">Visibility</div>
+          <div class="cat-weight">40%</div>
+        </div>
+        <div class="cat-score-display">
+          <div class="cat-score">26</div>
+          <div class="cat-max">/ 100</div>
+        </div>
+        <div class="cat-progress">
+          <div class="cat-progress-bar" style="width: 26%;"></div>
+        </div>
+        <p class="cat-desc">The biggest drag. AI discoverability is 0, and NAP consistency is hurt by two conflicting Allstate listings with different phone numbers. Directory coverage is the one bright spot.</p>
+        <div style="margin-top:12px; border-top:1px solid var(--border-soft); padding-top:10px; font-family:var(--mono); font-size:11px; color:var(--ink-soft); line-height:1.9;">
+          <div style="display:flex; justify-content:space-between;"><span>NAP consistency <span style="color:var(--ink-mute);">·25%</span></span><strong style="color:var(--red);">40</strong></div>
+          <div style="display:flex; justify-content:space-between;"><span>Directory coverage <span style="color:var(--ink-mute);">·25%</span></span><strong style="color:var(--navy-deep);">65</strong></div>
+          <div style="display:flex; justify-content:space-between;"><span>AI discoverability <span style="color:var(--ink-mute);">·50%</span></span><strong style="color:var(--red);">0</strong></div>
+        </div>
+      </div>
+
+      <div class="cat-card reputation">
+        <div class="cat-header">
+          <div class="cat-name">Reputation</div>
+          <div class="cat-weight">35%</div>
+        </div>
+        <div class="cat-score-display">
+          <div class="cat-score">42</div>
+          <div class="cat-max">/ 100</div>
+        </div>
+        <div class="cat-progress">
+          <div class="cat-progress-bar" style="width: 42%;"></div>
+        </div>
+        <p class="cat-desc">Below average. A 3.9★ rating sits under the 4.0 threshold consumers and engines treat as a cutoff, on modest volume split across two pages, with no visible owner responses and a generic bio.</p>
+        <div style="margin-top:12px; border-top:1px solid var(--border-soft); padding-top:10px; font-family:var(--mono); font-size:11px; color:var(--ink-soft); line-height:1.9;">
+          <div style="display:flex; justify-content:space-between;"><span>Reviews <span style="color:var(--ink-mute);">·70%</span></span><strong style="color:var(--red);">45</strong></div>
+          <div style="display:flex; justify-content:space-between;"><span>Bio &amp; story <span style="color:var(--ink-mute);">·30%</span></span><strong style="color:var(--red);">35</strong></div>
+        </div>
+      </div>
+
+      <div class="cat-card engagement">
+        <div class="cat-header">
+          <div class="cat-name">Engagement</div>
+          <div class="cat-weight">25%</div>
+        </div>
+        <div class="cat-score-display">
+          <div class="cat-score">12</div>
+          <div class="cat-max">/ 100</div>
+        </div>
+        <div class="cat-progress">
+          <div class="cat-progress-bar" style="width: 12%;"></div>
+        </div>
+        <p class="cat-desc">The weakest category. No local press or awards could be confirmed, chamber membership could not be verified, and no referral partnerships are visible online.</p>
+        <div style="margin-top:12px; border-top:1px solid var(--border-soft); padding-top:10px; font-family:var(--mono); font-size:11px; color:var(--ink-soft); line-height:1.9;">
+          <div style="display:flex; justify-content:space-between;"><span>Press &amp; awards <span style="color:var(--ink-mute);">·40%</span></span><strong style="color:var(--red);">15</strong></div>
+          <div style="display:flex; justify-content:space-between;"><span>Community presence <span style="color:var(--ink-mute);">·35%</span></span><strong style="color:var(--red);">15</strong></div>
+          <div style="display:flex; justify-content:space-between;"><span>Referral network <span style="color:var(--ink-mute);">·25%</span></span><strong style="color:var(--red);">5</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="index-summary" style="margin-top:24px;">
+      <div class="index-icon">Σ</div>
+      <div class="index-text">
+        <strong>How the 28 is calculated</strong>
+        <span>(Visibility 26 × 0.40) + (Reputation 42 × 0.35) + (Engagement 12 × 0.25) = 10.5 + 14.7 + 3.1 = <strong>28.3 → 28</strong>. Tier: Middle-Low (20–49). The fastest gains are the foundational fixes: consolidating the split listings, claiming the missing directories, and adding the bilingual story to the bio.</span>
+      </div>
+      <div class="index-score">28</div>
+    </div>
+
+    <p style="margin-top: 18px; font-size: 13px; color: var(--ink-soft);"><strong>Two honesty notes on this score.</strong> First, the <em>Reviews</em> parameter reflects the verified Google profile (3.9★ / 42) and the two Allstate pages (4.0★ / 350 and 3.8★ / 95) — the split is itself part of why this scores low, since Allstate is fragmenting the agent's own review signal across two profiles. Second, <em>Engagement</em> is low because the items that would lift it — local press, chamber membership, referral partnerships — could not be independently verified; if any are confirmed, the score would rise.</p>
+    </div>
+</section>
+
+<!-- ========== SECTION 4: KEY COMPETITORS ========== -->
+<section class="alt">
+  <div class="container">
+    <div class="section-num">04 · Key Competitors in Your Market</div>
+    <h2>Who's <em>winning AI search</em> here <span class="verified-tag">Measured · Ratings as Cited</span></h2>
+    <p class="section-lede"><strong>This is the competitive set that actually matters for AI visibility.</strong> These are the agencies the engines named most often across the 11 neutral Pilsen prompts — the businesses winning the recommendations you're not getting. The "neutral prompts won" column counts how many of the 11 prompts each surfaced in across the three engines. Ratings are as cited by the engines (mostly from Google) and weren't all independently re-verified, so they're directional.</p>
+
+    <div class="compete-table-wrap">
+      <table class="compete-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Agent / Agency</th>
+            <th>Carrier</th>
+            <th>Neutral prompts won</th>
+            <th>Rating (as cited)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rank-cell">1</td>
+            <td class="agent-cell"><strong>Sharon Robles Agency</strong><small>Independent · Pilsen</small></td>
+            <td><span class="carrier-tag indep">Independent</span></td>
+            <td class="score-now">8 / 11</td>
+            <td>4.9★ · 43 reviews</td>
+          </tr>
+          <tr>
+            <td class="rank-cell">2</td>
+            <td class="agent-cell"><strong>Magnum Insurance Agency</strong><small>Independent · Pilsen</small></td>
+            <td><span class="carrier-tag indep">Independent</span></td>
+            <td class="score-now">8 / 11</td>
+            <td>4.7★ · 51 reviews</td>
+          </tr>
+          <tr>
+            <td class="rank-cell">3</td>
+            <td class="agent-cell"><strong>Illinois Vehicle (Xpert)</strong><small>Independent · Pilsen</small></td>
+            <td><span class="carrier-tag indep">Independent</span></td>
+            <td class="score-now">7 / 11</td>
+            <td>4.9★ · 601 reviews</td>
+          </tr>
+          <tr>
+            <td class="rank-cell">4</td>
+            <td class="agent-cell"><strong>Elvia Solis — State Farm</strong><small>State Farm · Pilsen</small></td>
+            <td><span class="carrier-tag statefarm">State Farm</span></td>
+            <td class="score-now">6 / 11</td>
+            <td>4.9★ · 537 reviews</td>
+          </tr>
+          <tr>
+            <td class="rank-cell">5</td>
+            <td class="agent-cell"><strong>Farmers Insurance — Jose Perez</strong><small>Farmers · Pilsen</small></td>
+            <td><span class="carrier-tag indep">Farmers</span></td>
+            <td class="score-now">6 / 11</td>
+            <td>4.9★ · 233 reviews</td>
+          </tr>
+          <tr>
+            <td class="rank-cell">6</td>
+            <td class="agent-cell"><strong>Sylvia Torres Underhill — State Farm</strong><small>State Farm · Pilsen area</small></td>
+            <td><span class="carrier-tag statefarm">State Farm</span></td>
+            <td class="score-now">6 / 11</td>
+            <td>not cited</td>
+          </tr>
+          <tr class="you-row">
+            <td class="rank-cell">—</td>
+            <td class="agent-cell"><strong>Jose De Santiago (you)</strong><small>Allstate · 1613 S Halsted St, 60608</small></td>
+            <td><span class="carrier-tag allstate">Allstate</span></td>
+            <td class="score-now" style="color: var(--red);">0 / 11</td>
+            <td>3.9★ · 42 reviews</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top: 20px; font-size: 14px; color: var(--ink-soft);"><strong>What this shows:</strong> the agencies winning Pilsen AI search cluster at 4.7–4.9★ on review volumes from 43 to 600+, and several lead with bilingual, neighborhood-specific positioning. Your 3.9★ on 42 reviews sits below the whole set. Notably, other captive agents win here too — Elvia Solis (State Farm), and even another Allstate agent, Sergio De La Torre, surfaced — so being a captive agent isn't the barrier. The barriers are rating, review volume, and local positioning, all of which the action plan addresses.</p>
+
+    <p style="margin-top: 14px; font-size: 13px; color: var(--ink-mute);"><em>"Neutral prompts won" counts the prompts (of 11) where each agency was named by at least one engine in the June 22, 2026 run. Ratings are as cited by the engines and are directional. Month-over-month movement will appear once a second monthly snapshot is collected.</em></p>
+    </div>
+</section>
+
+<!-- ========== SECTION 5: ACTION PLAN BY CATEGORY ========== -->
+<section>
+  <div class="container">
+    <div class="section-num">05 · Your Action Plan</div>
+    <h2>What to <em>work on next</em> <span class="verified-tag">Based on Measured Data</span></h2>
+    <p class="section-lede">Actions are ordered by impact. Each shows the parameter's <strong>current score and a realistic target</strong> if the action is completed — achievable targets based on the verified findings, not guarantees. The fastest wins are foundational: fixing the split listings and the bio costs little and removes the conflicting signals the engines are currently reading.</p>
+
+    <div class="action-category">
+      <div class="action-cat-header visibility">
+        <div class="action-cat-title">
+          <div class="action-cat-badge">1</div>
+          <div class="action-cat-name">Visibility Actions<small>40% of score · Measured 26/100 · highest leverage</small></div>
+        </div>
+        <div class="action-cat-score">26<small>/100</small></div>
+      </div>
+      <div class="action-list">
+        <div class="action-row">
+          <div class="action-text">
+            <h4>Consolidate the two conflicting Allstate listings</h4>
+            <p>Allstate currently hosts <strong>two separate pages for your office</strong> — one with phone (312) 850-0775 and 350 reviews, another with (773) 292-2300 and 95 reviews. This splits your review signal and makes the engines disagree on your number (they did, in the by-name test). Work with Allstate to merge these into one canonical profile with a single phone. This is the highest-priority fix and the root of much of the NAP problem.</p>
+            <span class="impact-target">NAP Consistency 40 <span class="arrow">→</span> 80+ target</span>
+          </div>
+          <div class="action-meta">
+            <span class="timeframe-pill tf-urgent">Urgent · 14 days</span>
+            <span class="effort">Medium effort</span>
+          </div>
+        </div>
+        <div class="action-row">
+          <div class="action-text">
+            <h4>Build off-platform review volume above the 4.0 line</h4>
+            <p>The agencies winning Pilsen AI search sit at 4.7–4.9★ on far more reviews. Your 3.9★ on 42 is below the threshold engines and consumers treat as a cutoff. A sustained Google review campaign — raising both rating and volume — is the most direct lever on AI discoverability, currently 0.</p>
+            <span class="impact-target">AI Discoverability 0 <span class="arrow">→</span> 20+ target</span>
+          </div>
+          <div class="action-meta">
+            <span class="timeframe-pill tf-urgent">Urgent · ongoing</span>
+            <span class="effort">Higher effort</span>
+          </div>
+        </div>
+        <div class="action-row">
+          <div class="action-text">
+            <h4>Claim Apple Maps, Bing Places, and Nextdoor</h4>
+            <p>All three returned no listing for your agency. They feed AI engines and map assistants, and claiming them is a quick, well-defined win that widens directory coverage.</p>
+            <span class="impact-target">Directory Coverage 65 <span class="arrow">→</span> 85+ target</span>
+          </div>
+          <div class="action-meta">
+            <span class="timeframe-pill tf-urgent">Urgent · 14 days</span>
+            <span class="effort">Medium effort</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-category">
+      <div class="action-cat-header reputation">
+        <div class="action-cat-title">
+          <div class="action-cat-badge">2</div>
+          <div class="action-cat-name">Reputation Actions<small>35% of score · Measured 42/100</small></div>
+        </div>
+        <div class="action-cat-score">42<small>/100</small></div>
+      </div>
+      <div class="action-list">
+        <div class="action-row">
+          <div class="action-text">
+            <h4>Rewrite the bio with a real, bilingual, Pilsen-specific story</h4>
+            <p>Your current allstate.com bio is generic template copy — no personal story, no mention of Pilsen, and your Spanish-language capability is buried in a structured field rather than stated in the narrative. In a heavily Spanish-speaking neighborhood, leading with bilingual service and genuine local ties is the single highest-value, lowest-cost reputation fix, and it directly supports the Spanish-language prompt opportunity.</p>
+            <span class="impact-target">Bio &amp; Story 35 <span class="arrow">→</span> 80+ target</span>
+          </div>
+          <div class="action-meta">
+            <span class="timeframe-pill tf-urgent">Urgent · 14 days</span>
+            <span class="effort">Low effort</span>
+          </div>
+        </div>
+        <div class="action-row">
+          <div class="action-text">
+            <h4>Start responding to reviews — especially the critical ones</h4>
+            <p>There are no visible owner replies on your reviews, and several negatives go unanswered (slow email response; "inherited agent" theme). Responding professionally to every review — and addressing the service complaints directly — both improves the signal engines read and can recover the relationships behind the criticism.</p>
+            <span class="impact-target">Reviews 45 <span class="arrow">→</span> 65+ target</span>
+          </div>
+          <div class="action-meta">
+            <span class="timeframe-pill tf-medium">Medium · ongoing</span>
+            <span class="effort">Low effort</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-category">
+      <div class="action-cat-header engagement">
+        <div class="action-cat-title">
+          <div class="action-cat-badge">3</div>
+          <div class="action-cat-name">Engagement Actions<small>25% of score · Measured 12/100</small></div>
+        </div>
+        <div class="action-cat-score">12<small>/100</small></div>
+      </div>
+      <div class="action-list">
+        <div class="action-row">
+          <div class="action-text">
+            <h4>Join and get listed in a local chamber</h4>
+            <p>Chamber membership could not be confirmed for your agency — and notably, a competing Farmers agent <em>is</em> the listed insurance member of the Pilsen Chamber. Joining the Pilsen or a Chicago Hispanic chamber and getting listed in its public directory creates an independently verifiable local-authority signal you currently lack.</p>
+            <span class="impact-target">Community Presence 15 <span class="arrow">→</span> 50+ target</span>
+          </div>
+          <div class="action-meta">
+            <span class="timeframe-pill tf-medium">Medium · 30 days</span>
+            <span class="effort">Low effort</span>
+          </div>
+        </div>
+        <div class="action-row">
+          <div class="action-text">
+            <h4>Establish and publish local referral partnerships</h4>
+            <p>No referral partnerships are visible online — this parameter scored 5/100. A few documented relationships with local dealers, realtors, or lenders, made visible through cross-links, is the largest single opportunity in this category. See Section 06 for prospect types.</p>
+            <span class="impact-target">Referral Network 5 <span class="arrow">→</span> 40+ target</span>
+          </div>
+          <div class="action-meta">
+            <span class="timeframe-pill tf-medium">Medium · 90 days</span>
+            <span class="effort">Medium effort</span>
+          </div>
+        </div>
+        <div class="action-row">
+          <div class="action-text">
+            <h4>Pursue a local-press or community feature</h4>
+            <p>No local press or awards could be confirmed. A feature in a Pilsen/Lower West Side community outlet, or sponsoring a visible neighborhood event, would create the first real press-and-awards signal — currently near zero.</p>
+            <span class="impact-target">Press &amp; Awards 15 <span class="arrow">→</span> 40+ target</span>
+          </div>
+          <div class="action-meta">
+            <span class="timeframe-pill tf-medium">Medium · 90 days</span>
+            <span class="effort">Medium effort</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 28px; font-size: 14px; color: var(--ink-soft);"><strong>Where this could go:</strong> Jose's score is low but the lowest-hanging fixes are unusually cheap — consolidating the duplicate Allstate listings and rewriting the bio to lead with bilingual, Pilsen-specific service cost little and remove the conflicting and generic signals the engines currently read. Combined with a genuine Google review push to clear the 4.0★ line, there is clear room to move from 28 well up into the Middle-Low-to-Middle-High range. Targets shown are realistic estimates, not guarantees, and will be re-measured in the next monthly snapshot.</p>
+    </div>
+</section>
+
+<!-- ========== SECTION 6: LOCAL BUSINESS OPPORTUNITIES ========== -->
+<section class="alt">
+  <div class="container">
+    <div class="section-num">06 · Local Business Opportunities</div>
+    <h2>Referral partners <em>right in your backyard</em> <span class="verified-tag">Real Businesses · Google-Verified</span></h2>
+    <p class="section-lede">Referral partnerships are a direct lever on the Engagement category (Referral Network scored 5/100 — none are currently visible online). Below are <strong>real, verified businesses</strong> near your office whose customers regularly need exactly what you sell — auto, home, renters, condo, and business policies. Names, addresses, phones, and ratings are confirmed via Google. The decision-maker contact is shown as a role to research; in a live engagement we identify the specific person before outreach.</p>
+
+    <div class="opp-intro">
+      <div class="opp-intro-text">
+        <h3>Verified Pilsen-area prospects ready for outreach</h3>
+        <p>A single preferred-agent arrangement with a busy dealership, realtor, or lender can generate a steady stream of warm referrals. These are real businesses within a few miles of 1613 S Halsted St — a starting list to build on.</p>
+      </div>
+      <div class="opp-intro-stat">
+        <div class="big-num">9</div>
+        <div class="big-label">Verified Prospects</div>
+      </div>
+    </div>
+
+    <div class="opp-table-wrap">
+      <table class="opp-table">
+        <thead>
+          <tr>
+            <th>Business</th>
+            <th>Contact <span style="font-weight:400;text-transform:none;letter-spacing:0;">(role to research)</span></th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th class="col-dist">Google rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="opp-biz"><strong>Olmo's Auto Sales</strong><span class="opp-cat">Auto Dealer</span></td>
+            <td class="opp-person"><span class="opp-title">Sales Manager</span></td>
+            <td class="opp-phone">(773) 376-8836</td>
+            <td class="opp-addr">2505 S Western Ave, Chicago, IL 60608</td>
+            <td class="opp-dist">4.7★ · 84</td>
+          </tr>
+          <tr>
+            <td class="opp-biz"><strong>High Quality Auto Group</strong><span class="opp-cat">Auto Dealer</span></td>
+            <td class="opp-person"><span class="opp-title">Finance / Sales Manager</span></td>
+            <td class="opp-phone">(773) 675-1370</td>
+            <td class="opp-addr">4400 S Archer Ave, Chicago, IL 60632</td>
+            <td class="opp-dist">4.8★ · 471</td>
+          </tr>
+          <tr>
+            <td class="opp-biz"><strong>Chicago Motors Inc.</strong><span class="opp-cat">Auto Dealer</span></td>
+            <td class="opp-person"><span class="opp-title">Sales Manager</span></td>
+            <td class="opp-phone">(773) 235-6500</td>
+            <td class="opp-addr">2553 W Chicago Ave, Chicago, IL 60622</td>
+            <td class="opp-dist">4.8★ · 846</td>
+          </tr>
+          <tr>
+            <td class="opp-biz"><strong>New Avenue Realty</strong><span class="opp-cat">Real Estate Brokerage</span></td>
+            <td class="opp-person"><span class="opp-title">Managing Broker</span></td>
+            <td class="opp-phone">(312) 444-0981</td>
+            <td class="opp-addr">1655 S Blue Island Ave #305, Chicago, IL 60608</td>
+            <td class="opp-dist">4.9★ · 34</td>
+          </tr>
+          <tr>
+            <td class="opp-biz"><strong>Realty of Chicago — Pilsen</strong><span class="opp-cat">Real Estate Brokerage</span></td>
+            <td class="opp-person"><span class="opp-title">Managing Broker</span></td>
+            <td class="opp-phone">(312) 278-3137</td>
+            <td class="opp-addr">1504 W 18th St, Chicago, IL 60608</td>
+            <td class="opp-dist">4.3★ · 27</td>
+          </tr>
+          <tr>
+            <td class="opp-biz"><strong>Moe Al-Ali — Kind Lending</strong><span class="opp-cat">Mortgage Lender</span></td>
+            <td class="opp-person"><span class="opp-title">Loan Officer</span></td>
+            <td class="opp-phone">(708) 296-3602</td>
+            <td class="opp-addr">2141 S Halsted St, Chicago, IL 60608</td>
+            <td class="opp-dist">5.0★ · 40</td>
+          </tr>
+          <tr>
+            <td class="opp-biz"><strong>Emilio Fabian Diaz at Rate</strong><span class="opp-cat">Mortgage Lender</span></td>
+            <td class="opp-person"><span class="opp-title">Loan Officer (NMLS #1506006)</span></td>
+            <td class="opp-phone">(312) 736-9580</td>
+            <td class="opp-addr">1450 W 18th St 1st Floor, Chicago, IL 60608</td>
+            <td class="opp-dist">5.0★ · 2</td>
+          </tr>
+          <tr>
+            <td class="opp-biz"><strong>Hales Property Management</strong><span class="opp-cat">Property Manager</span></td>
+            <td class="opp-person"><span class="opp-title">Portfolio / Property Manager</span></td>
+            <td class="opp-phone">(312) 666-0149</td>
+            <td class="opp-addr">1411 W Chicago Ave #1, Chicago, IL 60642</td>
+            <td class="opp-dist">4.5★ · 612</td>
+          </tr>
+          <tr>
+            <td class="opp-biz"><strong>HomeRiver Group Chicago</strong><span class="opp-cat">Property Manager</span></td>
+            <td class="opp-person"><span class="opp-title">Property Manager</span></td>
+            <td class="opp-phone">(630) 324-4267</td>
+            <td class="opp-addr">600 W Cermak Rd Ste 2A2, Chicago, IL 60616</td>
+            <td class="opp-dist">4.4★ · 425</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size: 13px; color: var(--ink-mute); margin: 0 0 8px;"><strong>Verified businesses; contact person to be researched.</strong> Business names, addresses, phone numbers, and ratings are confirmed via Google Places. The specific decision-maker at each is identified during a live engagement before outreach — we list a role here rather than an unverified name. Lower-rated nearby businesses were intentionally excluded.</p>
+
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="container">
+    <div class="ftitle">AIgent Impact</div>
+    <p>Monthly Report for Jose De Santiago · Allstate Insurance · Chicago IL (Pilsen)</p>
+    <p style="margin-top: 4px; color: #8A8275; font-size: 12px;">AI visibility measured June 22, 2026 across ChatGPT, Gemini, and Claude · Prepared by Xeno Media · Baseline measurement</p>
+  </div>
+</footer>
+
+</body>
+</html>
