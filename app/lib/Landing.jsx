@@ -43,7 +43,7 @@ function Nav() {
         </nav>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
           <a href="#" style={{ fontSize: 14.5, fontWeight: 600, color: 'var(--ink)', whiteSpace: 'nowrap' }} className="nav-login">Log in</a>
-          <button className="btn btn-primary" style={{ padding: '11px 20px', fontSize: 14.5, backgroundColor: "rgb(222, 125, 108)" }}>See your score</button>
+          <button className="btn btn-primary nav-cta" style={{ padding: '11px 20px', fontSize: 14.5, backgroundColor: "rgb(222, 125, 108)" }}>See your score</button>
         </div>
       </div>
     </header>);
@@ -98,7 +98,7 @@ function Hero({ headline, sub, score }) {
               <span key={i}>{part}</span>)}
             </h1>
             <p className="lead" style={{ marginTop: 24, maxWidth: 520 }}>{sub}</p>
-            <div style={{ display: 'flex', gap: 13, marginTop: 36, flexWrap: 'wrap' }}>
+            <div className="hero-cta" style={{ display: 'flex', gap: 13, marginTop: 36, flexWrap: 'wrap' }}>
               <button className="btn btn-primary" style={{ fontSize: 16, padding: '15px 26px', backgroundColor: "rgb(222, 125, 108)" }}>Get my score</button>
               <button className="btn btn-ghost" style={{ fontSize: 16, padding: '15px 26px' }}>How the engine works</button>
             </div>

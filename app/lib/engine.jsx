@@ -128,8 +128,8 @@ export function ScoreGauge({ score = 82, recalc = false }) {
 
   return (
     <div ref={ref}>
-      <div style={{ position: 'relative', width: 320, height: 320, margin: '0 auto' }}>
-        <svg width="320" height="320" viewBox="0 0 320 320">
+      <div style={{ position: 'relative', width: 320, maxWidth: '100%', aspectRatio: '1 / 1', margin: '0 auto' }}>
+        <svg width="320" height="320" viewBox="0 0 320 320" style={{ width: '100%', height: '100%', display: 'block' }}>
           {segs.map((s, i) => (
             <g key={i}>
               <path d={arc(s.z0, s.z1)} fill="none" stroke={s.color} strokeOpacity="0.15" strokeWidth={SW} strokeLinecap="round" />
