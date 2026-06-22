@@ -1,5 +1,7 @@
 import './globals.css';
 import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
+import ConsentGate from './lib/ConsentGate';
+import StatusBar from './lib/StatusBar';
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -33,7 +35,10 @@ export default function RootLayout({ children }) {
         }}
         className={`${jakarta.variable} ${jetbrains.variable}`}
       >
-        {children}
+        <ConsentGate>
+          <StatusBar />
+          {children}
+        </ConsentGate>
       </body>
     </html>
   );

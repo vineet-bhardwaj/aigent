@@ -26,7 +26,7 @@ function Nav() {
   const links = [['How it works', '#engine'], ['Rankings', '#rankings'], ['Citations', '#citations'], ['Trend', '#trend']];
   return (
     <header style={{
-      position: 'sticky', top: 0, zIndex: 50,
+      position: 'sticky', top: 'var(--banner-h, 0px)', zIndex: 50,
       background: scrolled ? 'rgba(247,249,254,0.82)' : 'transparent',
       backdropFilter: scrolled ? 'saturate(180%) blur(14px)' : 'none',
       borderBottom: '1px solid ' + (scrolled ? 'var(--line)' : 'transparent'),
