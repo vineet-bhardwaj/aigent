@@ -61,9 +61,10 @@ export default function ConsentGate({ children }) {
             <p style={{
               fontSize: 14.5, lineHeight: 1.6, color: 'var(--ink-2, #3A4A72)', margin: '0 0 26px',
             }}>
-              This site and its reports contain confidential analysis prepared for
-              authorized recipients. By selecting <strong>Accept</strong> you agree to
-              our terms and acknowledge this information is for your private use only.
+              These web pages, systems and business logic are the Intellectual
+              Property of Xeno Media Inc. and are confidential. Access is provided
+              for the intended recipients only for evaluation and discussion. Any
+              other use is strictly prohibited.
             </p>
             <button
               onClick={accept}

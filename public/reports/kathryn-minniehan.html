@@ -1180,6 +1180,21 @@
 </head>
 <body>
 
+<!-- ========== ACCEPT-TO-ENTER GATE ========== -->
+<div id="consent-gate" role="dialog" aria-modal="true" aria-labelledby="consent-title" style="position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#01267C 0%,#0A1E5E 100%);display:flex;align-items:center;justify-content:center;padding:24px;">
+  <div style="position:absolute;top:-15%;left:50%;transform:translateX(-50%);width:900px;height:600px;pointer-events:none;background:radial-gradient(ellipse at center, rgba(75,141,250,0.30), transparent 65%);"></div>
+  <div style="position:relative;width:100%;max-width:460px;background:#fff;border-radius:18px;box-shadow:0 30px 80px -20px rgba(8,22,59,0.55);padding:38px 36px 32px;text-align:center;">
+    <div style="font-family:var(--display);font-size:30px;line-height:1;margin-bottom:22px;letter-spacing:-0.04em;">
+      <span style="color:#01267C;font-style:italic;font-weight:800;">AI</span><span style="color:#4B8DFA;font-weight:800;">gent&nbsp;Impact</span>
+    </div>
+    <h2 id="consent-title" style="font-family:var(--display);font-size:22px;font-weight:800;letter-spacing:-0.02em;color:#08163B;margin:0 0 12px;">Before you continue</h2>
+    <p style="font-size:14.5px;line-height:1.6;color:#3A4A72;margin:0 0 26px;">These web pages, systems and business logic are the Intellectual Property of Xeno Media Inc. and are confidential. Access is provided for the intended recipients only for evaluation and discussion. Any other use is strictly prohibited.</p>
+    <button type="button" onclick="document.getElementById('consent-gate').remove();document.body.style.overflow='';" style="width:100%;display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--display);font-size:16px;font-weight:600;padding:15px 26px;border:none;border-radius:12px;cursor:pointer;color:#fff;background-color:#DE7D6C;">Accept &amp; Continue</button>
+    <a href="https://www.google.com" style="display:inline-block;margin-top:16px;font-size:13px;font-weight:500;color:#6B7AA0;text-decoration:none;">Decline and leave</a>
+  </div>
+</div>
+<script>document.body.style.overflow='hidden';</script>
+
 <!-- ========== CONFIDENTIAL STATUS BAR ========== -->
 <div role="note" style="position:sticky;top:0;z-index:200;width:100%;background:linear-gradient(135deg,#01267C 0%,#0A1E5E 100%);color:#fff;text-align:center;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;line-height:1.4;padding:8px 16px;border-bottom:1px solid rgba(255,255,255,0.12);">
   Confidential — for use in discussions with Xeno Media only. Sharing of this material is strictly prohibited.
