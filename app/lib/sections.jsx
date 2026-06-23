@@ -67,7 +67,7 @@ export function RealitySection() {
           <div className="section-head">
             <span className="eyebrow"><span className="dot"></span>The reality</span>
             <h2 className="h-sect" style={{ marginTop: 22 }}>AI already shapes the buying decision.</h2>
-            <p className="lead" style={{ marginTop: 18 }}>
+            <p className="lead" style={{ marginTop: 18, fontSize: 20 }}>
               Generative- and answer-engines like ChatGPT and Google AI are increasingly central to US household decision-making — and it will only continue to accelerate.
             </p>
           </div>
@@ -184,7 +184,7 @@ export function LeaderboardSection({ youScore, live }) {
             <ul style={{ listStyle: 'none', padding: 0, margin: '30px 0 0', display: 'flex', flexDirection: 'column', gap: 14 }}>
               {['Benchmarked against every insurance agent in your local market', 'Watch competitors rise and fall in real time'].map((t, i) =>
               <li key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', fontSize: 15.5, color: 'var(--ink-2)' }}>
-                  <span style={{ width: 22, height: 22, borderRadius: 7, background: 'var(--bg-soft)', color: 'var(--azure-600)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 13, fontWeight: 800 }}>✓</span>
+                  <span style={{ width: 22, height: 22, borderRadius: 7, background: 'var(--bg-soft)', color: 'var(--azure-600)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontWeight: 800, fontSize: 10 }}>✓</span>
                   {t}
                 </li>
               )}
@@ -288,6 +288,65 @@ export function RecoSection() {
               <div style={{ marginTop: 14, display: 'flex', alignItems: 'center', gap: 8, color: 'var(--azure-600)', fontWeight: 600, fontSize: 14.5 }}>
                 Start <span style={{ transition: 'transform .2s' }}>→</span>
               </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>);
+
+}
+
+/* ---------- Outcomes: what AIgent Impact delivers ---------- */
+export function OutcomesSection() {
+  const [ref, seen] = useInView({ threshold: 0.2 });
+  const outcomes = [
+  {
+    n: '01',
+    t: 'Drive more leads to local agents',
+    d: 'Showing up first in AI answers turns invisible searches into a steady stream of inbound prospects for your agency.',
+    subs: null,
+  },
+  {
+    n: '02',
+    t: 'Deliver better-qualified leads',
+    d: 'Buyers reaching you through AI have already asked specific, high-intent questions — so the conversations you have start far closer to the close.',
+    subs: null,
+  },
+  {
+    n: '03',
+    t: 'Uncover community opportunities',
+    d: 'See exactly where to get more engaged in your community — on- and offline — to build the local authority engines reward.',
+    subs: ['Business networking opportunities', 'Community events', 'Community discussions'],
+  }];
+
+  return (
+    <section className="section" id="outcomes">
+      <div className="wrap" ref={ref}>
+        <SectionHead
+          eyebrow={<><span className="dot"></span>The payoff</>}
+          title="What AIgent Impact will do for you."
+          lead="A higher score isn't the goal — it's the means. Here's what better AI visibility delivers to your agency." />
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 18, marginTop: 50 }} className="outcomes-grid">
+          {outcomes.map((o, i) =>
+          <div key={i} className="card" style={{
+            padding: 32, display: 'flex', flexDirection: 'column',
+            opacity: seen ? 1 : 0, transform: seen ? 'none' : 'translateY(14px)',
+            transition: `opacity .6s ease ${i * 110}ms, transform .6s ease ${i * 110}ms`
+          }}>
+              <span className="mono tnum" style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.1em', color: 'var(--azure-600)' }}>{o.n}</span>
+              <h3 style={{ fontSize: 21, fontWeight: 700, letterSpacing: '-0.02em', margin: '16px 0 12px', lineHeight: 1.18 }}>{o.t}</h3>
+              <p style={{ fontSize: 15, color: 'var(--ink-2)', lineHeight: 1.55, flex: o.subs ? '0 0 auto' : 1 }}>{o.d}</p>
+              {o.subs &&
+              <ul style={{ listStyle: 'none', padding: 0, margin: '20px 0 0', display: 'flex', flexDirection: 'column', gap: 11, flex: 1 }}>
+                  {o.subs.map((s) =>
+                <li key={s} style={{ display: 'flex', gap: 11, alignItems: 'center', fontSize: 14.5, color: 'var(--ink-2)', fontWeight: 500 }}>
+                      <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--azure)', flexShrink: 0 }}></span>
+                      {s}
+                    </li>
+                )}
+                </ul>
+              }
             </div>
           )}
         </div>

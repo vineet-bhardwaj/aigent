@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Wordmark, ScoreGauge, ScanFeed } from './engine';
 import {
   TaglineFlow, RealitySection, EngineSection, LeaderboardSection,
-  CitationSection, TrendSection, RecoSection, FinalCTA, Footer,
+  OutcomesSection, CitationSection, TrendSection, RecoSection, FinalCTA, Footer,
 } from './sections';
 
 /* Baked-in content (the design's final tweak defaults) */
@@ -141,6 +141,7 @@ export default function Landing() {
       <RealitySection />
       <TaglineFlow />
       <LeaderboardSection youScore={CONTENT.yourScore} live={CONTENT.liveBoard} />
+      <OutcomesSection />
       <div id="engine"><EngineSection /></div>
       <CitationSection />
       <TrendSection />
