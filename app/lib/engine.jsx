@@ -230,7 +230,7 @@ export function ScanFeed() {
             fontSize: 10.5, fontWeight: 600, padding: '3px 7px', borderRadius: 5,
             background: 'rgba(120,160,255,0.12)', color: 'var(--azure-400)', flexShrink: 0,
           }}>{r.e}</span>
-          <span className="mono" style={{ fontSize: 12, color: 'var(--dk-ink-2)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{r.q}</span>
+          <span className="mono" style={{ fontSize: 12, color: 'var(--dk-ink-2)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', flex: 1, minWidth: 0 }}>{r.q}</span>
           <span style={{ marginLeft: 'auto', flexShrink: 0, fontSize: 11, fontWeight: 700, fontFamily: 'var(--mono)', color: r.hit ? 'var(--pos)' : 'var(--coral)' }}>
             {r.hit ? '◉ cited' : '○ missed'}
           </span>

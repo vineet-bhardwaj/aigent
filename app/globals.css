@@ -133,6 +133,10 @@ button { font-family: inherit; cursor: pointer; }
 /* ====== animations & responsive (from the prototype's inline <style>) ====== */
 @keyframes feedIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
+/* grid tracks default to minmax(auto, 1fr) — let children shrink so nowrap
+   content (e.g. the engine-scan rows) can't force the track wider than the viewport */
+.hero-grid > *, .engine-grid > *, .lb-grid > *, .reality-top > * { min-width: 0; }
+
 @media (max-width: 940px) {
   .hero-grid, .engine-grid, .lb-grid, .reality-top { grid-template-columns: 1fr !important; gap: 44px !important; }
   .nav-links { display: none !important; }
