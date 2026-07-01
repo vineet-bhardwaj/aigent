@@ -6,7 +6,7 @@ import { NextResponse } from 'next/server';
 // (Project → Settings → Environment Variables) without touching code.
 // Locally, set them in .env.local (see .env.example).
 //
-// - The main site uses SITE_USERNAME / SITE_PASSWORD.
+// - The main site accepts any of the credential pairs in SITE.creds.
 // - Each report under /reports/<slug> has its OWN login, defined in the
 //   REPORTS map below. Give every report a distinct realm so browsers prompt
 //   for a fresh login when moving between areas (Basic Auth caches per-realm).
@@ -15,9 +15,12 @@ import { NextResponse } from 'next/server';
 // and set the two matching env vars in Vercel.
 
 const SITE = {
-  user: process.env.SITE_USERNAME || 'allstate',
-  pass: process.env.SITE_PASSWORD || 'impact-generator',
   realm: 'AIgent Impact',
+  // Any of these user/pass pairs grants access to the main site.
+  creds: [
+    { user: process.env.SITE_USERNAME || 'allstate', pass: process.env.SITE_PASSWORD || 'impact-generator' },
+    { user: process.env.SITE_USERNAME_2 || 'xeno', pass: process.env.SITE_PASSWORD_2 || 'xeno' },
+  ],
 };
 
 // NOTE: env vars must be referenced statically (not via a computed key) so the
@@ -47,7 +50,7 @@ function realmFor(pathname) {
     const slug = m[1];
     const report = REPORTS[slug];
     if (report) {
-      return { user: report.user, pass: report.pass, realm: `Report · ${slug}` };
+      return { realm: `Report · ${slug}`, creds: [{ user: report.user, pass: report.pass }] };
     }
     // Unknown report file — fall back to the site login rather than leaving it open.
   }
@@ -62,7 +65,7 @@ function isAuthorized(authHeader, expected) {
   const idx = decoded.indexOf(':');
   const user = decoded.slice(0, idx);
   const pass = decoded.slice(idx + 1);
-  return user === expected.user && pass === expected.pass;
+  return expected.creds.some((c) => user === c.user && pass === c.pass);
 }
 
 export function middleware(request) {
