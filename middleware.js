@@ -50,7 +50,14 @@ function realmFor(pathname) {
     const slug = m[1];
     const report = REPORTS[slug];
     if (report) {
-      return { realm: `Report · ${slug}`, creds: [{ user: report.user, pass: report.pass }] };
+      return {
+        realm: `Report · ${slug}`,
+        creds: [
+          { user: report.user, pass: report.pass },
+          // Shared xeno/xeno login also opens every report.
+          { user: process.env.REPORT_XENO_USER || 'xeno', pass: process.env.REPORT_XENO_PASS || 'xeno' },
+        ],
+      };
     }
     // Unknown report file — fall back to the site login rather than leaving it open.
   }
