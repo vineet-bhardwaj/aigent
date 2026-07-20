@@ -19,7 +19,7 @@ const SITE = {
   // Any of these user/pass pairs grants access to the main site.
   creds: [
     { user: process.env.SITE_USERNAME || 'allstate', pass: process.env.SITE_PASSWORD || 'impact-generator' },
-    { user: process.env.SITE_USERNAME_2 || 'xeno', pass: process.env.SITE_PASSWORD_2 || 'xeno' },
+    { user: process.env.SITE_USERNAME_2 || 'xeno', pass: process.env.SITE_PASSWORD_2 || 'xenoclients' },
   ],
 };
 
@@ -62,8 +62,8 @@ function realmFor(pathname) {
         realm: `Report · ${slug}`,
         creds: [
           { user: report.user, pass: report.pass },
-          // Shared xeno/xeno login also opens every report.
-          { user: process.env.REPORT_XENO_USER || 'xeno', pass: process.env.REPORT_XENO_PASS || 'xeno' },
+          // Shared xeno/xenoclients login also opens every report.
+          { user: process.env.REPORT_XENO_USER || 'xeno', pass: process.env.REPORT_XENO_PASS || 'xenoclients' },
         ],
       };
     }
