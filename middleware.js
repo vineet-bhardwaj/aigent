@@ -34,6 +34,10 @@ const REPORTS = {
     user: process.env.REPORT_JOSE_USER || 'allstate',
     pass: process.env.REPORT_JOSE_PASS || 'lowscore-example',
   },
+  'jose-de-santiago-v2': {
+    user: process.env.REPORT_JOSE_V2_USER || 'allstate',
+    pass: process.env.REPORT_JOSE_V2_PASS || 'lowscore-example-v2',
+  },
 };
 
 export const config = {
