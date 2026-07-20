@@ -38,6 +38,10 @@ const REPORTS = {
     user: process.env.REPORT_JOSE_V2_USER || 'allstate',
     pass: process.env.REPORT_JOSE_V2_PASS || 'lowscore-example-v2',
   },
+  'kathryn-minniehan-v2': {
+    user: process.env.REPORT_KATHRYN_V2_USER || 'allstate',
+    pass: process.env.REPORT_KATHRYN_V2_PASS || 'midscore-example-v2',
+  },
 };
 
 export const config = {
