@@ -1175,17 +1175,26 @@
   .caution-box strong { color:#8A6420; }
   .caution-box p { font-size:13.5px; color:var(--ink-soft); margin:6px 0 0; line-height:1.55; }
 
-  /* ========== SECTION NAV ========== */
-  .secnav { background:var(--surface); border-bottom:1px solid var(--border); box-shadow:0 1px 3px rgba(8,22,59,.05); }
-  .secnav-inner { max-width:1000px; margin:0 auto; padding:12px 32px; display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
-  .secnav-label { font-family:var(--mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-mute); font-weight:600; margin-right:6px; }
-  .secnav a { font-family:var(--mono); font-size:11px; letter-spacing:0.02em; color:var(--ink-soft); text-decoration:none; padding:5px 10px; border:1px solid var(--border); border-radius:20px; white-space:nowrap; transition:all .15s ease; }
-  .secnav a:hover { color:#fff; background:var(--azure-600); border-color:var(--azure-600); }
-  .secnav a .n { color:var(--azure-600); font-weight:700; }
-  .secnav a:hover .n { color:#fff; }
+  /* ========== SECTION NAV (sticky, prominent) ========== */
+  /* Sticks directly beneath the 33px confidential bar so both stay pinned. */
+  .secnav { position:sticky; top:33px; z-index:150; background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%); border-top:1px solid rgba(255,255,255,0.14); box-shadow:0 8px 20px -10px rgba(8,22,59,0.5); }
+  .secnav-inner { max-width:1000px; margin:0 auto; padding:13px 32px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .secnav-label { font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.6); font-weight:700; margin-right:10px; }
+  .secnav a { font-family:var(--mono); font-size:12px; letter-spacing:0.02em; color:rgba(255,255,255,0.94); text-decoration:none; padding:6px 12px; border:1px solid rgba(255,255,255,0.2); border-radius:8px; background:rgba(255,255,255,0.07); white-space:nowrap; transition:all .15s ease; }
+  .secnav a:hover { color:var(--navy); background:#fff; border-color:#fff; transform:translateY(-1px); }
+  .secnav a .n { color:var(--azure-400); font-weight:700; }
+  .secnav a:hover .n { color:var(--azure-600); }
   html { scroll-behavior:smooth; }
-  section[id] { scroll-margin-top:16px; }
-  @media (max-width:760px){ .secnav-inner { padding:10px 18px; gap:5px; } .secnav a { font-size:10px; padding:4px 8px; } }
+  section[id] { scroll-margin-top:92px; }   /* clear the confidential bar + sticky nav on jump */
+  /* On narrow screens the bar wraps to 48px; keep the nav one swipeable row. */
+  @media (max-width:760px){
+    .secnav { top:48px; }
+    .secnav-inner { flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding:10px 18px; gap:6px; }
+    .secnav-inner::-webkit-scrollbar { display:none; }
+    .secnav-label { position:sticky; left:0; }
+    .secnav a { font-size:11px; padding:5px 10px; }
+    section[id] { scroll-margin-top:104px; }
+  }
 
   /* ========== FOOTER ========== */
   footer {
