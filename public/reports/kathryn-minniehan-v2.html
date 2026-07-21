@@ -1073,12 +1073,60 @@
     text-align: right;
     white-space: nowrap;
   }
+  .opp-how-box {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    margin-top: 20px;
+  }
+  .opp-how-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--azure-600);
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .opp-how-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .opp-how-step {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .opp-step-num {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--coral);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    flex-shrink: 0;
+    margin-top: -2px;
+  }
+  .opp-step-text {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .opp-step-text strong {
+    display: block;
+    color: var(--navy);
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
   @media (max-width: 820px) {
     .opp-intro { grid-template-columns: 1fr; }
     .opp-intro-stat { text-align: left; }
     .opp-table { font-size: 12px; }
     .opp-table thead th, .opp-table tbody td { padding: 10px 10px; }
     .opp-addr { max-width: none; }
+    .opp-how-steps { grid-template-columns: 1fr; }
   }
 
 
@@ -1103,6 +1151,8 @@
   .topic-tag.state { color:var(--azure-600); background:rgba(46,111,242,0.1); }
   .topic-card h4 { font-family:var(--display); font-size:15px; color:var(--navy-deep); margin-bottom:6px; }
   .topic-card p { font-size:13px; color:var(--ink-soft); margin:0; line-height:1.5; }
+  .topic-card .src { display:inline-block; margin-top:10px; font-family:var(--mono); font-size:10px; letter-spacing:0.04em; text-transform:uppercase; color:var(--azure-600); text-decoration:none; border-bottom:1px solid rgba(46,111,242,0.3); }
+  .topic-card .src:hover { border-bottom-color:var(--azure-600); }
 
   .spon-group { margin:20px 0; }
   .spon-group h3 { display:flex; align-items:center; gap:8px; }
@@ -1117,10 +1167,34 @@
   .spon-name small { display:block; font-weight:400; color:var(--ink-mute); font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.04em; margin-top:2px; }
   .spon-when { font-family:var(--mono); font-size:12px; color:var(--coral); white-space:nowrap; }
   .spon-contact { font-size:12.5px; color:var(--ink-soft); }
+  .spon-name a, .spon-contact a { color:var(--azure-600); text-decoration:none; border-bottom:1px solid rgba(46,111,242,0.25); }
+  .spon-name a:hover, .spon-contact a:hover { border-bottom-color:var(--azure-600); }
+  .spon-defunct { color:var(--ink-mute); font-style:italic; }
 
   .caution-box { background:var(--gold-soft); border:1px solid rgba(242,163,60,0.4); border-radius:12px; padding:16px 20px; margin:18px 0; }
   .caution-box strong { color:#8A6420; }
   .caution-box p { font-size:13.5px; color:var(--ink-soft); margin:6px 0 0; line-height:1.55; }
+
+  /* ========== SECTION NAV (sticky, prominent) ========== */
+  /* Sticks directly beneath the 33px confidential bar so both stay pinned. */
+  .secnav { position:sticky; top:33px; z-index:150; background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%); border-top:1px solid rgba(255,255,255,0.14); box-shadow:0 8px 20px -10px rgba(8,22,59,0.5); }
+  .secnav-inner { max-width:1000px; margin:0 auto; padding:13px 32px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .secnav-label { font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.6); font-weight:700; margin-right:10px; }
+  .secnav a { font-family:var(--mono); font-size:12px; letter-spacing:0.02em; color:rgba(255,255,255,0.94); text-decoration:none; padding:6px 12px; border:1px solid rgba(255,255,255,0.2); border-radius:8px; background:rgba(255,255,255,0.07); white-space:nowrap; transition:all .15s ease; }
+  .secnav a:hover { color:var(--navy); background:#fff; border-color:#fff; transform:translateY(-1px); }
+  .secnav a .n { color:var(--azure-400); font-weight:700; }
+  .secnav a:hover .n { color:var(--azure-600); }
+  html { scroll-behavior:smooth; }
+  section[id] { scroll-margin-top:92px; }   /* clear the confidential bar + sticky nav on jump */
+  /* On narrow screens the bar wraps to 48px; keep the nav one swipeable row. */
+  @media (max-width:760px){
+    .secnav { top:48px; }
+    .secnav-inner { flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding:10px 18px; gap:6px; }
+    .secnav-inner::-webkit-scrollbar { display:none; }
+    .secnav-label { position:sticky; left:0; }
+    .secnav a { font-size:11px; padding:5px 10px; }
+    section[id] { scroll-margin-top:104px; }
+  }
 
   /* ========== FOOTER ========== */
   footer {
@@ -1249,11 +1323,19 @@
   </div>
 </section>
 
+<!-- ========== SECTION NAV ========== -->
+<nav class="secnav">
+  <div class="secnav-inner">
+    <span class="secnav-label">Jump to</span>
+    <a href="#sec01"><span class="n">01</span> AI Ranking</a><a href="#sec02"><span class="n">02</span> Prompts</a><a href="#sec03"><span class="n">03</span> Score</a><a href="#sec04"><span class="n">04</span> Competitors</a><a href="#sec05"><span class="n">05</span> Action Plan</a><a href="#sec06"><span class="n">06</span> Referrals</a><a href="#sec07"><span class="n">07</span> Roadmap</a><a href="#sec08"><span class="n">08</span> Hot Topics</a><a href="#sec09"><span class="n">09</span> Sponsorships</a><a href="#sec10"><span class="n">10</span> Community</a>
+  </div>
+</nav>
+
 <!-- ========== SECTION 1: AI ENGINE RANKINGS ========== -->
-<section>
+<section id="sec01">
   <div class="container">
-    <div class="section-num">01 · AIgent Impact Ranking on Key AI Engines</div>
-    <h2>How you <em>rank across each AI engine</em> <span class="verified-tag">Measured</span></h2>
+    <div class="section-num">01 · How you rank across each AI engine</div>
+    <h2>AIgent Impact <em>Ranking on Key AI Engines</em> <span class="verified-tag">Measured</span></h2>
     <p class="section-lede"><strong>Refreshed measurement — July 2026 run.</strong> We re-ran the 11-prompt corpus (10 neutral + 1 named) on each of three engines (ChatGPT, Gemini, Claude). The result is the finding that matters: in neutral local searches — the way a real consumer asks, without naming you — you almost never appear, and this run was weaker than the last. You are found when someone already knows your name, but not discovered by someone shopping for an agent. Perplexity was not part of this run.</p>
 
     <div class="finding-banner">
@@ -1382,7 +1464,7 @@
 </section>
 
 <!-- ========== SECTION 2: PERFORMING PROMPTS ========== -->
-<section class="alt">
+<section class="alt" id="sec02">
   <div class="container">
     <div class="section-num">02 · Your Performing Prompts</div>
     <h2>What the engines <em>said instead of you</em> <span class="verified-tag">Measured · Jul 2026</span></h2>
@@ -1586,7 +1668,7 @@
 </section>
 
 <!-- ========== SECTION 3: CATEGORY SCORES ========== -->
-<section>
+<section id="sec03">
   <div class="container">
     <div class="section-num">03 · Score by Category</div>
     <h2>Your <em>52 points</em> broken down <span class="verified-tag">Measured · Jul 2026</span></h2>
@@ -1658,7 +1740,7 @@
 </section>
 
 <!-- ========== SECTION 4: KEY COMPETITORS ========== -->
-<section class="alt">
+<section class="alt" id="sec04">
   <div class="container">
     <div class="section-num">04 · Key Competitors in Your Market</div>
     <h2>Who's <em>winning AI search</em> here <span class="verified-tag">Measured · Ratings Verified</span></h2>
@@ -1736,7 +1818,7 @@
 </section>
 
 <!-- ========== SECTION 5: ACTION PLAN BY CATEGORY ========== -->
-<section>
+<section id="sec05">
   <div class="container">
     <div class="section-num">05 · Your Action Plan</div>
     <h2>What to <em>work on next</em> <span class="verified-tag">Based on Measured Data</span></h2>
@@ -1874,144 +1956,79 @@
 </section>
 
 <!-- ========== SECTION 6: LOCAL BUSINESS OPPORTUNITIES ========== -->
-<section class="alt">
+<section class="alt" id="sec06">
   <div class="container">
     <div class="section-num">06 · Local Business Opportunities</div>
-    <h2>Referral partners <em>right in your backyard</em> <span class="illus-tag">Illustrative · Contacts Not Verified</span></h2>
-    <p class="section-lede"><strong>Illustrative — contact names and phone numbers below are placeholders and have NOT been verified.</strong> This section demonstrates the format of the monthly referral-outreach list. In a live report each contact's name, title, direct line, and address are researched and verified before delivery. <strong>Do not call or rely on the contacts below; they are sample data.</strong></p>
+    <h2>Referral partners <em>right in your backyard</em> <span class="verified-tag">Google-Verified</span></h2>
+    <p class="section-lede">Real, verified Clarksville-area businesses whose customers need exactly what you sell — weighted toward your Fort Campbell / military market (auto, boat, motorcycle, RV, home closings, PCS moves). Every name, phone, and rating below is confirmed via Google; low-rated businesses were excluded. The contact is shown as a <em>role to research</em> — we identify and verify the specific decision-maker before outreach, so you never cold-call a guessed name.</p>
 
     <div class="opp-intro">
       <div class="opp-intro-text">
-        <h3>14 high-value referral contacts (sample layout)</h3>
-        <p>A single preferred-agent arrangement with a busy dealership can generate 15–30 warm referrals per month. In production we do the legwork — verified names, titles, and direct numbers. The rows below are illustrative only.</p>
+        <h3>Verified referral partners across your core categories</h3>
+        <p>A single preferred-agent arrangement with a busy dealership, realtor, or lender can generate a steady stream of warm referrals. This is a vetted starting list; each month we refresh it and research the named decision-maker and direct line for the ones you choose to pursue.</p>
       </div>
       <div class="opp-intro-stat">
-        <div class="big-num">14</div>
-        <div class="big-label">Contacts (sample)</div>
+        <div class="big-num">15</div>
+        <div class="big-label">Verified Businesses</div>
       </div>
     </div>
 
-    <div class="opp-table-wrap">
-      <table class="opp-table">
-        <thead>
-          <tr>
-            <th>Business</th>
-            <th>Contact <span style="font-weight:400;text-transform:none;letter-spacing:0;">(illustrative)</span></th>
-            <th>Phone <span style="font-weight:400;text-transform:none;letter-spacing:0;">(illustrative)</span></th>
-            <th>Address</th>
-            <th class="col-dist">Distance</th>
-          </tr>
-        </thead>
+    <div class="spon-table-wrap">
+      <table class="spon-table">
+        <thead><tr><th>Business</th><th>Category · ask for</th><th>Phone</th><th>Rating</th></tr></thead>
         <tbody>
-          <tr>
-            <td class="opp-biz"><strong>Wyatt Johnson Used Cars</strong><span class="opp-cat">Auto Dealer</span></td>
-            <td class="opp-person"><strong>Brian Tackett</strong><span class="opp-title">General Sales Manager</span></td>
-            <td class="opp-phone">(931) 552-3400</td>
-            <td class="opp-addr">2350 Wilma Rudolph Blvd, Clarksville, TN 37040</td>
-            <td class="opp-dist">1.8 mi</td>
-          </tr>
-          <tr>
-            <td class="opp-biz"><strong>James Corlew Chevrolet</strong><span class="opp-cat">Auto Dealer</span></td>
-            <td class="opp-person"><strong>Dana Whitfield</strong><span class="opp-title">Finance Director</span></td>
-            <td class="opp-phone">(931) 647-2151</td>
-            <td class="opp-addr">1810 Wilma Rudolph Blvd, Clarksville, TN 37040</td>
-            <td class="opp-dist">2.1 mi</td>
-          </tr>
-          <tr>
-            <td class="opp-biz"><strong>Gary Mathews Motors</strong><span class="opp-cat">Auto Dealer</span></td>
-            <td class="opp-person"><strong>Marcus Reyes</strong><span class="opp-title">Used Car Sales Manager</span></td>
-            <td class="opp-phone">(931) 906-7000</td>
-            <td class="opp-addr">2715 Wilma Rudolph Blvd, Clarksville, TN 37040</td>
-            <td class="opp-dist">2.4 mi</td>
-          </tr>
-          <tr>
-            <td class="opp-biz"><strong>Clarksville Auto Mart</strong><span class="opp-cat">Auto Dealer</span></td>
-            <td class="opp-person"><strong>Tony Albright</strong><span class="opp-title">Owner</span></td>
-            <td class="opp-phone">(931) 645-8822</td>
-            <td class="opp-addr">1503 Fort Campbell Blvd, Clarksville, TN 37042</td>
-            <td class="opp-dist">3.0 mi</td>
-          </tr>
-          <tr>
-            <td class="opp-biz"><strong>Riverside Marine &amp; Powersports</strong><span class="opp-cat">Boat / Marine Dealer</span></td>
-            <td class="opp-person"><strong>Greg Sandlin</strong><span class="opp-title">Sales Manager</span></td>
-            <td class="opp-phone">(931) 503-1190</td>
-            <td class="opp-addr">1245 College St, Clarksville, TN 37040</td>
-            <td class="opp-dist">3.6 mi</td>
-          </tr>
-          <tr>
-            <td class="opp-biz"><strong>Cumberland Boat Center</strong><span class="opp-cat">Boat / Marine Dealer</span></td>
-            <td class="opp-person"><strong>Lisa Hargrove</strong><span class="opp-title">Owner / Principal</span></td>
-            <td class="opp-phone">(931) 217-4408</td>
-            <td class="opp-addr">3890 Trenton Rd, Clarksville, TN 37040</td>
-            <td class="opp-dist">7.2 mi</td>
-          </tr>
-          <tr>
-            <td class="opp-biz"><strong>Lake Barkley Marine</strong><span class="opp-cat">Boat / Marine Dealer</span></td>
-            <td class="opp-person"><strong>Doug Pennington</strong><span class="opp-title">General Manager</span></td>
-            <td class="opp-phone">(270) 924-1077</td>
-            <td class="opp-addr">114 Marina Rd, Cadiz, KY 42211</td>
-            <td class="opp-dist">13.4 mi</td>
-          </tr>
-          <tr>
-            <td class="opp-biz"><strong>Appleton Harley-Davidson</strong><span class="opp-cat">Motorcycle Dealer</span></td>
-            <td class="opp-person"><strong>Rick Damon</strong><span class="opp-title">Sales Manager</span></td>
-            <td class="opp-phone">(931) 552-9810</td>
-            <td class="opp-addr">2501 Madison St, Clarksville, TN 37043</td>
-            <td class="opp-dist">2.9 mi</td>
-          </tr>
-          <tr>
-            <td class="opp-biz"><strong>Fort Campbell Powersports</strong><span class="opp-cat">RV / Powersports Dealer</span></td>
-            <td class="opp-person"><strong>Sara Coffey</strong><span class="opp-title">Business Manager</span></td>
-            <td class="opp-phone">(931) 431-6600</td>
-            <td class="opp-addr">4120 Fort Campbell Blvd, Clarksville, TN 37042</td>
-            <td class="opp-dist">5.1 mi</td>
-          </tr>
-          <tr>
-            <td class="opp-biz"><strong>Keller Williams Realty Clarksville</strong><span class="opp-cat">Real Estate Brokerage</span></td>
-            <td class="opp-person"><strong>Amanda Steele</strong><span class="opp-title">Managing Broker</span></td>
-            <td class="opp-phone">(931) 648-8500</td>
-            <td class="opp-addr">2271 Wilma Rudolph Blvd, Clarksville, TN 37040</td>
-            <td class="opp-dist">2.0 mi</td>
-          </tr>
-          <tr>
-            <td class="opp-biz"><strong>RE/MAX Mockingbird Realty</strong><span class="opp-cat">Real Estate Brokerage</span></td>
-            <td class="opp-person"><strong>Derrick Holloway</strong><span class="opp-title">Broker / Owner</span></td>
-            <td class="opp-phone">(931) 906-1234</td>
-            <td class="opp-addr">1820 Memorial Dr, Clarksville, TN 37043</td>
-            <td class="opp-dist">3.3 mi</td>
-          </tr>
-          <tr>
-            <td class="opp-biz"><strong>Coldwell Banker Conroy Marable</strong><span class="opp-cat">Real Estate Brokerage</span></td>
-            <td class="opp-person"><strong>Patricia Nunez</strong><span class="opp-title">Office Manager</span></td>
-            <td class="opp-phone">(931) 552-5000</td>
-            <td class="opp-addr">2103 Lowes Dr, Clarksville, TN 37040</td>
-            <td class="opp-dist">2.7 mi</td>
-          </tr>
-          <tr>
-            <td class="opp-biz"><strong>Legends Bank Mortgage</strong><span class="opp-cat">Mortgage Lender</span></td>
-            <td class="opp-person"><strong>Kevin Marsh</strong><span class="opp-title">Senior Loan Officer</span></td>
-            <td class="opp-phone">(931) 503-1234</td>
-            <td class="opp-addr">1810 Memorial Dr, Clarksville, TN 37043</td>
-            <td class="opp-dist">3.4 mi</td>
-          </tr>
-          <tr>
-            <td class="opp-biz"><strong>F&amp;M Bank Home Lending</strong><span class="opp-cat">Mortgage Lender</span></td>
-            <td class="opp-person"><strong>Renee Calhoun</strong><span class="opp-title">Mortgage Loan Originator</span></td>
-            <td class="opp-phone">(931) 553-2600</td>
-            <td class="opp-addr">50 Franklin St, Clarksville, TN 37040</td>
-            <td class="opp-dist">4.0 mi</td>
-          </tr>
+          <tr><td class="spon-name">Family First Auto Sales<small>1336 Fort Campbell Blvd</small></td><td class="spon-contact">Used cars · F&amp;I / Sales Manager</td><td class="spon-contact">(931) 919-4744</td><td class="spon-when" style="color:var(--green)">4.9★ · 1,712</td></tr>
+          <tr><td class="spon-name">Fort Campbell Auto Sales<small>military-facing</small></td><td class="spon-contact">Used cars · F&amp;I Manager</td><td class="spon-contact">(931) 546-8700</td><td class="spon-when" style="color:var(--green)">4.9★ · 1,171</td></tr>
+          <tr><td class="spon-name">A+ Auto Sales<small>841 Franklin St · downtown</small></td><td class="spon-contact">Used cars · Sales Manager</td><td class="spon-contact">(931) 503-8243</td><td class="spon-when" style="color:var(--green)">4.8★ · 553</td></tr>
+          <tr><td class="spon-name">Tailwater Marine &amp; Tackle<small>927 Dover Rd</small></td><td class="spon-contact">Boat / marine · Sales Manager</td><td class="spon-contact">(931) 648-3431</td><td class="spon-when" style="color:var(--green)">4.6★ · 122</td></tr>
+          <tr><td class="spon-name">Malone's Marine<small>Buchanan TN</small></td><td class="spon-contact">Boat / marine · Owner</td><td class="spon-contact">(731) 642-9222</td><td class="spon-when" style="color:var(--green)">4.7★ · 96</td></tr>
+          <tr><td class="spon-name">Appleton Harley-Davidson<small>2501 US-41A Byp</small></td><td class="spon-contact">Motorcycle · Sales Manager</td><td class="spon-contact">(931) 648-1607</td><td class="spon-when" style="color:var(--green)">4.7★ · 1,250</td></tr>
+          <tr><td class="spon-name">Bish's RV of Oak Grove<small>Oak Grove KY</small></td><td class="spon-contact">RV · General Sales Manager</td><td class="spon-contact">(270) 770-2267</td><td class="spon-when" style="color:var(--green)">4.8★ · 99</td></tr>
+          <tr><td class="spon-name">Garland RV Sales Tennessee<small>Springville TN</small></td><td class="spon-contact">RV · Sales Manager</td><td class="spon-contact">(731) 924-4200</td><td class="spon-when" style="color:var(--green)">4.7★ · 674</td></tr>
+          <tr><td class="spon-name">Jaime Wallace Team<small>Realtor</small></td><td class="spon-contact">Real estate · Lead Agent</td><td class="spon-contact">(931) 320-1358</td><td class="spon-when" style="color:var(--green)">5.0★ · 207</td></tr>
+          <tr><td class="spon-name">Evolve Real Estate: SOLD Sisters<small>Realtor</small></td><td class="spon-contact">Real estate · Lead Agent</td><td class="spon-contact">(270) 349-7575</td><td class="spon-when" style="color:var(--green)">5.0★ · 143</td></tr>
+          <tr><td class="spon-name">Jerry Turner — Veterans Lending Group<small>VA loan specialist</small></td><td class="spon-contact">Mortgage · Loan Officer (named)</td><td class="spon-contact">(931) 338-3935</td><td class="spon-when" style="color:var(--green)">5.0★ · 87</td></tr>
+          <tr><td class="spon-name">Castle Rock Mortgage<small>local lender</small></td><td class="spon-contact">Mortgage · Loan Officer</td><td class="spon-contact">(931) 906-1489</td><td class="spon-when" style="color:var(--green)">4.9★ · 352</td></tr>
+          <tr><td class="spon-name">ABRA Auto Body Clarksville<small>855 Kraft St</small></td><td class="spon-contact">Collision · Shop Manager</td><td class="spon-contact">(931) 647-5512</td><td class="spon-when" style="color:var(--green)">4.6★ · 695</td></tr>
+          <tr><td class="spon-name">ATC Moving Company<small>PCS moves</small></td><td class="spon-contact">Moving · Owner</td><td class="spon-contact">(931) 291-5018</td><td class="spon-when" style="color:var(--green)">4.9★ · 213</td></tr>
+          <tr><td class="spon-name">Copper Key Realty &amp; Management<small>property management</small></td><td class="spon-contact">Property mgmt · Portfolio Manager</td><td class="spon-contact">(931) 245-8950</td><td class="spon-when" style="color:var(--green)">4.5★ · 1,117</td></tr>
         </tbody>
       </table>
     </div>
 
-    <p style="font-size: 13px; color: var(--ink-mute); margin: 0 0 8px;"><strong>Illustrative data.</strong> In production, contact details are compiled from public listings and verified before delivery. The names and numbers above are sample placeholders and should not be contacted.</p>
+    <p style="font-size: 13px; color: var(--ink-mute); margin: 0 0 8px;"><strong>Verified businesses; contact person to be researched.</strong> Names, phones, and ratings are Google-confirmed (July 2026). Call the main line and ask for the target role, then confirm the specific decision-maker and direct line on the first call. The auto dealers, VA lender, and PCS mover are especially strong fits for your Fort Campbell market. Lower-rated nearby businesses were intentionally excluded.</p>
 
+    <div class="opp-how-box">
+      <div class="opp-how-title">How we help you work this list</div>
+      <div class="opp-how-steps">
+        <div class="opp-how-step">
+          <div class="opp-step-num">1</div>
+          <div class="opp-step-text">
+            <strong>We build the outreach list</strong>
+            Verified business, target role, and main line for every partner on your map — refreshed and expanded monthly, with the named decision-maker researched for the ones you pursue.
+          </div>
+        </div>
+        <div class="opp-how-step">
+          <div class="opp-step-num">2</div>
+          <div class="opp-step-text">
+            <strong>We write the pitch</strong>
+            A short, credible one-page leave-behind and email template tailored to each business type — auto dealer vs. realtor vs. lender.
+          </div>
+        </div>
+        <div class="opp-how-step">
+          <div class="opp-step-num">3</div>
+          <div class="opp-step-text">
+            <strong>You make the introductions</strong>
+            In-person drop-ins convert best. We prioritize contacts by estimated monthly referral volume so you know where to show up first.
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ========== SECTION 7: ROADMAP ========== -->
-<section>
+<section id="sec07">
   <div class="container">
     <div class="section-num">07 · Your 90-Day Roadmap</div>
     <h2>A <em>sequenced path</em> to the top tier <span class="verified-tag">Built From Section 05</span></h2>
@@ -2040,7 +2057,7 @@
         <div class="rm-when">Phase 3 · Days 46–90 · Growth</div>
         <div class="rm-title">Own the military-family niche</div>
         <ul class="rm-list">
-          <li>Open referral conversations from the network list in Section 11 (dealers, realtors, VA lenders, PCS movers).</li>
+          <li>Open referral conversations from the verified network list in Section 06 (dealers, realtors, VA lenders, PCS movers).</li>
           <li>Sponsor or show up at one military-facing local event (see Section 09) and document it online.</li>
           <li>Re-run the 11-prompt AI test to measure movement against this baseline.</li>
         </ul>
@@ -2050,7 +2067,7 @@
 </section>
 
 <!-- ========== SECTION 8: HOT TOPICS ========== -->
-<section class="alt">
+<section class="alt" id="sec08">
   <div class="container">
     <div class="section-num">08 · Hot Topics to Talk About Now</div>
     <h2>What Clarksville is <em>actually talking about</em> <span class="verified-tag">Sourced · Jul 2026</span></h2>
@@ -2061,31 +2078,37 @@
         <span class="topic-tag state">Tennessee</span>
         <h4>Tornado surge vs. premium lag</h4>
         <p>Tennessee tornado counts jumped roughly tenfold since 2022, but many homeowners still pay premiums calibrated to the calmer 2020–21 risk era. A timely "is your coverage keeping up?" conversation.</p>
+        <a class="src" href="https://www.moneygeek.com/insurance/homeowners/tornado-alley-home-insurance-rates/" target="_blank" rel="noopener">Source: MoneyGeek</a>
       </div>
       <div class="topic-card">
         <span class="topic-tag state">Tennessee</span>
-        <h4>Home rates rising 8–15% at renewal</h4>
-        <p>Severe convective-storm losses are pushing TN home premiums up at renewal in 2026, with older-roof repricing common. Helps clients understand their renewal notice before they panic-shop.</p>
+        <h4>Home rates rising at renewal</h4>
+        <p>Severe convective-storm losses are pushing TN home premiums up sharply at renewal in 2026, with older-roof repricing common. Helps clients understand their renewal notice before they panic-shop.</p>
+        <a class="src" href="https://www.wbbjtv.com/2026/07/10/insurance-rates-rising-homeowners-drivers-may-see-relief/" target="_blank" rel="noopener">Source: WBBJ (ABC)</a>
       </div>
       <div class="topic-card">
         <span class="topic-tag local">Clarksville</span>
         <h4>PCS season &amp; the 60–90 day window</h4>
         <p>Fort Campbell PCS moves peak in summer, and families buy on a tight 60–90 day window once orders firm. A "new to Clarksville? insurance checklist" piece meets that audience exactly.</p>
+        <a class="src" href="https://www.callkatiechilds.com/blog/pcs-to-fort-campbell-a-2026-buyers-guide-to-clarksville-tn" target="_blank" rel="noopener">Source: local Clarksville realtor</a>
       </div>
       <div class="topic-card">
         <span class="topic-tag local">Clarksville</span>
         <h4>Fast-growing county, new construction</h4>
-        <p>Montgomery County is among the nation's fastest-growing, with heavy new-build activity. Building costs nearly doubled — many homes are underinsured on replacement cost. A strong homeowner-education angle.</p>
+        <p>Montgomery County is among the region's fastest-growing, with heavy new-build activity. TN building costs roughly doubled (about $180 → $350/sq ft in 2024) — so many homes are underinsured on replacement cost. A strong homeowner-education angle.</p>
+        <a class="src" href="https://www.moneygeek.com/insurance/homeowners/average-cost-home-insurance-tennessee/" target="_blank" rel="noopener">Source: MoneyGeek</a>
       </div>
       <div class="topic-card">
         <span class="topic-tag local">Clarksville</span>
         <h4>Cross-border TN/KY coverage</h4>
-        <p>Fort Campbell straddles the TN–KY line, and you're licensed in both. A clear explainer on how coverage, registration, and rates differ across the border is genuinely useful and distinctly yours.</p>
+        <p>Fort Campbell sits on the TN–KY state line, and you're licensed in both. A clear explainer on how coverage, registration, and rates can differ across the border is genuinely useful and distinctly yours.</p>
+        <a class="src" href="https://montgomerytn.gov/residents/military" target="_blank" rel="noopener">Source: Montgomery County</a>
       </div>
       <div class="topic-card">
         <span class="topic-tag state">Tennessee</span>
         <h4>Spring severe-weather prep</h4>
-        <p>Middle Tennessee sits in the March–June severe-weather window. A seasonal "document your home before storm season" post is timely and shows local expertise.</p>
+        <p>Middle Tennessee sits in a high severe-weather zone during spring. A seasonal "document your home before storm season" post is timely and shows local expertise.</p>
+        <a class="src" href="https://www.moneygeek.com/insurance/homeowners/tornado-alley-home-insurance-rates/" target="_blank" rel="noopener">Source: MoneyGeek</a>
       </div>
     </div>
     <p style="font-size:12px;color:var(--ink-mute);margin-top:8px;"><em>Topics compiled from sourced July 2026 research. Verify specifics and dates before publishing, as fast-moving stories change.</em></p>
@@ -2093,7 +2116,7 @@
 </section>
 
 <!-- ========== SECTION 9: SPONSORSHIP OPPORTUNITIES ========== -->
-<section>
+<section id="sec09">
   <div class="container">
     <div class="section-num">09 · Sponsorship Opportunities</div>
     <h2>Where to <em>show up locally</em> <span class="verified-tag">Real Orgs &amp; Events</span></h2>
@@ -2105,10 +2128,10 @@
         <table class="spon-table">
           <thead><tr><th>Organization</th><th>Focus</th><th>Contact</th></tr></thead>
           <tbody>
-            <tr><td class="spon-name">Clarksville Area Chamber of Commerce<small>You're already a member</small></td><td>Member events, spotlights, business showcases</td><td class="spon-contact">25 Jefferson St Ste 300 · (931) 647-2331</td></tr>
-            <tr><td class="spon-name">Fort Campbell Family Readiness Groups<small>Every unit has one</small></td><td>Spouse-focused welcome &amp; deployment support events</td><td class="spon-contact">Via Montgomery County military office</td></tr>
-            <tr><td class="spon-name">USO Clarksville / AUSA Fort Campbell<small>Military-facing</small></td><td>Soldier/family events, awards functions</td><td class="spon-contact">Confirm chapter contact directly</td></tr>
-            <tr><td class="spon-name">APSU Alumni Association &amp; Foundation<small>You're an alum</small></td><td>Alumni events, Governor's Cup athletics</td><td class="spon-contact">Via Austin Peay State University</td></tr>
+            <tr><td class="spon-name"><a href="https://www.clarksvillechamber.com/" target="_blank" rel="noopener">Clarksville Area Chamber of Commerce</a><small>You're already a member</small></td><td>Member events, spotlights, business showcases</td><td class="spon-contact"><a href="https://www.clarksvillechamber.com/join" target="_blank" rel="noopener">Join / sponsor</a> · (931) 647-2331</td></tr>
+            <tr><td class="spon-name"><a href="https://home.army.mil/campbell/" target="_blank" rel="noopener">Fort Campbell Family Readiness Groups</a><small>Per-unit · no central page</small></td><td>Spouse-focused welcome &amp; deployment support events</td><td class="spon-contact">Approach unit-specific, or via <a href="https://montgomerytn.gov/residents/military" target="_blank" rel="noopener">County military office</a></td></tr>
+            <tr><td class="spon-name"><a href="https://fortcampbell.uso.org/" target="_blank" rel="noopener">USO Fort Campbell</a> / <a href="https://www.ausa.org/" target="_blank" rel="noopener">AUSA</a><small>Military-facing</small></td><td>Soldier/family events, awards functions. <span style="color:var(--coral);">Note: USO's sponsor page currently lists a local GEICO competitor — you'd be entering contested space.</span></td><td class="spon-contact"><a href="https://fortcampbell.uso.org/support/corporate-partnerships" target="_blank" rel="noopener">USO corporate partnerships</a></td></tr>
+            <tr><td class="spon-name"><a href="https://www.apsu.edu/" target="_blank" rel="noopener">APSU Alumni Association &amp; Foundation</a><small>You're an alum</small></td><td>Alumni events, Governor's Cup athletics</td><td class="spon-contact">Via <a href="https://www.apsu.edu/" target="_blank" rel="noopener">apsu.edu</a> (alumni / foundation)</td></tr>
           </tbody>
         </table>
       </div>
@@ -2120,11 +2143,10 @@
         <table class="spon-table">
           <thead><tr><th>Event</th><th>When</th><th>Organizer / note</th></tr></thead>
           <tbody>
-            <tr><td class="spon-name">Rivers &amp; Spires Festival<small>~100k+ attendees · downtown</small></td><td class="spon-when">April</td><td class="spon-contact">Montgomery County Gov · began as 101st Airborne tribute — strong military tie</td></tr>
-            <tr><td class="spon-name">Clarksville Riverfest<small>~30k attendees</small></td><td class="spon-when">September</td><td class="spon-contact">City of Clarksville · Liberty/McGregor Park</td></tr>
-            <tr><td class="spon-name">Christmas on the Cumberland<small>Holiday lights</small></td><td class="spon-when">Nov–Jan</td><td class="spon-contact">City of Clarksville · family-friendly</td></tr>
-            <tr><td class="spon-name">Best of Clarksville awards<small>You won in 2018</small></td><td class="spon-when">October</td><td class="spon-contact">Governor's Square Mall · re-enter to refresh the win</td></tr>
-            <tr><td class="spon-name">Artsville Festival<small>Local arts</small></td><td class="spon-when">October</td><td class="spon-contact">Confirm organizer &amp; sponsor tiers</td></tr>
+            <tr><td class="spon-name"><a href="https://www.clarksvilletn.gov/384/Christmas-on-the-Cumberland" target="_blank" rel="noopener">Christmas on the Cumberland</a><small>Holiday lights · McGregor Park</small></td><td class="spon-when">Nov–Jan</td><td class="spon-contact">City of Clarksville Parks &amp; Rec · (931) 645-7476</td></tr>
+            <tr><td class="spon-name"><a href="https://bestofclarksville.weebly.com/" target="_blank" rel="noopener">Best of Clarksville awards</a><small>You won in 2018</small></td><td class="spon-when">October</td><td class="spon-contact">Governor's Square Mall · <a href="https://clarksvillenow.com/best-of-clarksville/" target="_blank" rel="noopener">your 2018 win</a> — re-enter to refresh</td></tr>
+            <tr><td class="spon-name"><a href="https://clarksvillesbest.com/" target="_blank" rel="noopener">Clarksville's Best</a><small>Separate contest · 5 Star Media</small></td><td class="spon-when">Nom. Jul · results Nov</td><td class="spon-contact">155 categories; nominations open early July — enter this year</td></tr>
+            <tr><td class="spon-name">Artsville Festival<small>Local arts · verify organizer</small></td><td class="spon-when">October</td><td class="spon-contact">No official page found — confirm organizer &amp; sponsor tiers before committing</td></tr>
           </tbody>
         </table>
       </div>
@@ -2136,20 +2158,20 @@
         <table class="spon-table">
           <thead><tr><th>Outlet</th><th>Coverage</th><th>Note</th></tr></thead>
           <tbody>
-            <tr><td class="spon-name">Clarksville Now<small>5 Star Media Group</small></td><td>Primary local digital news; runs "Clarksville's Best"</td><td class="spon-contact">(931) 648-7720 · sponsorship + the awards contest</td></tr>
-            <tr><td class="spon-name">5 Star Media radio (9 stations)<small>Beaver 100.3, Q108, more</small></td><td>Local radio bundle, same owner as Clarksville Now</td><td class="spon-contact">(931) 648-7720 · advertising</td></tr>
-            <tr><td class="spon-name">The Leaf-Chronicle<small>Founded 1808 · USA Today Network</small></td><td>Clarksville newspaper, print + digital</td><td class="spon-contact">Display &amp; sponsored content</td></tr>
-            <tr><td class="spon-name">Clarksville Living Magazine<small>2018 "Best Local Magazine"</small></td><td>Affluent-consumer lifestyle</td><td class="spon-contact">Advertising inquiries</td></tr>
+            <tr><td class="spon-name"><a href="https://clarksvillenow.com/" target="_blank" rel="noopener">Clarksville Now</a><small>5 Star Media Group</small></td><td>Primary local digital news; runs "Clarksville's Best"</td><td class="spon-contact"><a href="https://fivestarmediagrp.com/contact/" target="_blank" rel="noopener">Advertise</a> · (931) 648-7720</td></tr>
+            <tr><td class="spon-name"><a href="https://5starradio.com/" target="_blank" rel="noopener">5 Star Media radio (9 stations)</a><small>Beaver 100.3, Q108, more</small></td><td>Local radio bundle, same owner as Clarksville Now</td><td class="spon-contact"><a href="https://fivestarmediagrp.com/contact/" target="_blank" rel="noopener">Advertise</a> · (931) 648-7720</td></tr>
+            <tr><td class="spon-name"><a href="https://www.theleafchronicle.com/" target="_blank" rel="noopener">The Leaf-Chronicle</a><small>Founded 1808 · USA Today Network</small></td><td>Clarksville newspaper, print + digital</td><td class="spon-contact">Ads via <a href="https://localiq.com/" target="_blank" rel="noopener">LocaliQ</a> (Gannett)</td></tr>
+            <tr><td class="spon-name"><a href="https://clarksvillefamily.com/" target="_blank" rel="noopener">Clarksville Living Magazine</a><small>2018 "Best Local Magazine"</small></td><td>Affluent-consumer lifestyle</td><td class="spon-contact">(931) 320-9869 · advertising inquiries</td></tr>
           </tbody>
         </table>
       </div>
     </div>
-    <p style="font-size:12px;color:var(--ink-mute);"><em>Confirm all sponsorship terms directly before committing. Prioritize the military-facing options (Rivers &amp; Spires, FRGs, USO) — they align with your biggest untapped market.</em></p>
+    <p style="font-size:12px;color:var(--ink-mute);"><em>Confirm all sponsorship terms directly before committing. Prioritize the military-facing options (Fort Campbell FRGs, USO) and the two award contests — they align with your biggest untapped market. Note: Rivers &amp; Spires (ended 2017) and Riverfest (ended 2023) are no longer running and have been removed.</em></p>
   </div>
 </section>
 
 <!-- ========== SECTION 10: COMMUNITY GROUPS ========== -->
-<section class="alt">
+<section class="alt" id="sec10">
   <div class="container">
     <div class="section-num">10 · Community Groups Online</div>
     <h2>Where to <em>show up authentically</em> <span class="verified-tag">Researched</span></h2>
@@ -2157,18 +2179,18 @@
 
     <div class="caution-box">
       <strong>Read this first.</strong>
-      <p>Most Clarksville community groups either restrict posts to neighborhood topics, buy-sell-trade, or are military-spouse spaces where outside commercial posts need admin permission. Spamming them would backfire. The productive routes: (1) sponsor events (Rivers &amp; Spires, Riverfest, Best of Clarksville), (2) advertise through 5 Star Media / Clarksville Now, and (3) stay active via the Chamber. Show up as a neighbor first.</p>
+      <p>Most Clarksville community groups either restrict posts to neighborhood topics, buy-sell-trade, or are military-spouse spaces where outside commercial posts need admin permission. Spamming them would backfire. The productive routes: (1) sponsor active events (Christmas on the Cumberland, Best of Clarksville / Clarksville's Best), (2) advertise through 5 Star Media / Clarksville Now, and (3) stay active via the Chamber. Show up as a neighbor first.</p>
     </div>
 
     <div class="spon-table-wrap">
       <table class="spon-table">
         <thead><tr><th>Group</th><th>Platform · size</th><th>Self-promo?</th></tr></thead>
         <tbody>
-          <tr><td class="spon-name">Clarksville &amp; Fort Campbell Yard Sale</td><td>Facebook · ~7,200</td><td class="spon-contact">Buy-sell-trade — limited service posts, check rules</td></tr>
-          <tr><td class="spon-name">The Lantern — Connecting Military Wives</td><td>Facebook · Clarksville</td><td class="spon-contact">Spouse community — admin permission needed</td></tr>
-          <tr><td class="spon-name">Fort Campbell / Clarksville Marketplace</td><td>Facebook Marketplace</td><td class="spon-contact">Transactional — not for insurance pitches</td></tr>
-          <tr><td class="spon-name">Best of Clarksville</td><td>Facebook · business community</td><td class="spon-contact">Engage via the awards, not self-promo</td></tr>
-          <tr><td class="spon-name">Nextdoor — Clarksville</td><td>Nextdoor · n/a</td><td class="spon-contact">Claim your existing (unclaimed) page; sponsored posts available in-app</td></tr>
+          <tr><td class="spon-name"><a href="https://www.facebook.com/clarksvillesyardsale/" target="_blank" rel="noopener">Clarksville &amp; Fort Campbell Yard Sale</a></td><td>Facebook page · ~7,200</td><td class="spon-contact">Public page — buy-sell-trade; service posts subject to admin moderation</td></tr>
+          <tr><td class="spon-name"><a href="https://www.facebook.com/thelanternclarksville/" target="_blank" rel="noopener">The Lantern — Connecting Military Wives</a></td><td>Facebook page · Clarksville</td><td class="spon-contact">Public page — message admin before any self-promo</td></tr>
+          <tr><td class="spon-name"><a href="https://www.facebook.com/marketplace/108534305837795/" target="_blank" rel="noopener">Clarksville Marketplace</a> / <a href="https://www.facebook.com/marketplace/1615284172084668/" target="_blank" rel="noopener">Fort Campbell</a></td><td>Facebook Marketplace</td><td class="spon-contact">Transactional — not for insurance pitches</td></tr>
+          <tr><td class="spon-name"><a href="https://www.facebook.com/BestofClarksville/" target="_blank" rel="noopener">Best of Clarksville</a></td><td>Facebook page · official contest</td><td class="spon-contact">Engage via the awards, not self-promo</td></tr>
+          <tr><td class="spon-name"><a href="https://nextdoor.com/pages/kathryn-minniehan-allstate-insurance-clarksville-tn/" target="_blank" rel="noopener">Nextdoor — your business page</a></td><td>Nextdoor · unclaimed</td><td class="spon-contact"><a href="https://nextdoor.com/pages/kathryn-minniehan-allstate-insurance-clarksville-tn/" target="_blank" rel="noopener">Claim it</a>; a <a href="https://nextdoor.com/pages/allstate-insurance-clarksville-tn-2/" target="_blank" rel="noopener">second stale listing</a> should be corrected/removed</td></tr>
         </tbody>
       </table>
     </div>
@@ -2176,50 +2198,16 @@
   </div>
 </section>
 
-<!-- ========== SECTION 11: EXPANDED NETWORK ========== -->
-<section>
-  <div class="container">
-    <div class="section-num">11 · Expanded Referral Network</div>
-    <h2>More partners <em>right in your backyard</em> <span class="verified-tag">Google-Verified</span></h2>
-    <p class="section-lede">A broader set of verified Clarksville-area businesses whose customers need exactly what you sell — expanding on the core categories with the everyday businesses that generate insurance moments (a new-car purchase, a PCS move, a claim repair, a home closing). Many here explicitly serve the military/PCS market, matching your biggest opportunity. All names, phones, and ratings are Google-confirmed; the contact is a role to research. Low-rated businesses were excluded.</p>
-
-    <div class="spon-table-wrap">
-      <table class="spon-table">
-        <thead><tr><th>Business</th><th>Category · ask for</th><th>Phone</th><th>Rating</th></tr></thead>
-        <tbody>
-          <tr><td class="spon-name">Family First Auto Sales<small>1336 Fort Campbell Blvd</small></td><td class="spon-contact">Used cars · F&amp;I / Sales Manager</td><td class="spon-contact">(931) 919-4744</td><td class="spon-when" style="color:var(--green)">4.9★ · 1,712</td></tr>
-          <tr><td class="spon-name">Fort Campbell Auto Sales<small>military-facing</small></td><td class="spon-contact">Used cars · F&amp;I Manager</td><td class="spon-contact">(931) 546-8700</td><td class="spon-when" style="color:var(--green)">4.9★ · 1,171</td></tr>
-          <tr><td class="spon-name">A+ Auto Sales<small>841 Franklin St · downtown</small></td><td class="spon-contact">Used cars · Sales Manager (Tommy)</td><td class="spon-contact">(931) 503-8243</td><td class="spon-when" style="color:var(--green)">4.8★ · 553</td></tr>
-          <tr><td class="spon-name">Jaime Wallace Team<small>Realtor</small></td><td class="spon-contact">Real estate · Lead Agent</td><td class="spon-contact">(931) 320-1358</td><td class="spon-when" style="color:var(--green)">5.0★ · 207</td></tr>
-          <tr><td class="spon-name">Evolve Real Estate: SOLD Sisters<small>Realtor</small></td><td class="spon-contact">Real estate · Lead Agent</td><td class="spon-contact">(270) 349-7575</td><td class="spon-when" style="color:var(--green)">5.0★ · 143</td></tr>
-          <tr><td class="spon-name">Jerry Turner — Veterans Lending Group<small>VA Loan Specialist</small></td><td class="spon-contact">Mortgage · Loan Officer (named)</td><td class="spon-contact">(931) 338-3935</td><td class="spon-when" style="color:var(--green)">5.0★ · 87</td></tr>
-          <tr><td class="spon-name">Castle Rock Mortgage<small>1065+ combined reviews</small></td><td class="spon-contact">Mortgage · Loan Officer</td><td class="spon-contact">(931) 906-1489</td><td class="spon-when" style="color:var(--green)">4.9★ · 352</td></tr>
-          <tr><td class="spon-name">ABRA Auto Body Clarksville<small>855 Kraft St</small></td><td class="spon-contact">Collision · Shop Manager</td><td class="spon-contact">(931) 647-5512</td><td class="spon-when" style="color:var(--green)">4.6★ · 695</td></tr>
-          <tr><td class="spon-name">ATC Moving Company<small>PCS moves</small></td><td class="spon-contact">Moving · Owner (Tyrone)</td><td class="spon-contact">(931) 291-5018</td><td class="spon-when" style="color:var(--green)">4.9★ · 213</td></tr>
-          <tr><td class="spon-name">Copper Key Realty &amp; Management<small>property management</small></td><td class="spon-contact">Property mgmt · Portfolio Manager</td><td class="spon-contact">(931) 245-8950</td><td class="spon-when" style="color:var(--green)">4.5★ · 1,117</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p style="font-size:12px;color:var(--ink-mute);margin-top:8px;"><em>Verified via Google Places, July 2026. Combine with the core list in Section 06 for the full outreach set. Confirm the specific contact person on the first call. The auto dealers, VA lender, and PCS mover above are especially strong fits for your Fort Campbell market.</em></p>
-  </div>
-</section>
-
 <!-- ========================================================================
      ADD NEW SECTIONS HERE
 
      Copy the pattern of any section above. Each is self-contained:
-
-       1. Banner comment:  SECTION 12: YOUR TITLE
-       2. A section element, with class "alt" to alternate the background.
-          Section 11 is plain, so the next should be "alt". NOTE: the class
-          is "alt", not "alt-band" -- there is no .alt-band rule.
-       3. Inside: div.container, div.section-num "12 · Title", then an h2
-          (wrap key words in em for the italic azure accent).
-
-     Component classes already in the stylesheet: hero-card, engines-grid,
-     category-grid, compete-table, action-category, opp-table,
-     prompts-table, index-summary, finding-banner, roadmap, topic-grid,
-     spon-table, caution-box, plus verified-tag / status-pill / volume-tag.
+       1. Banner comment reading  SECTION 11: YOUR TITLE
+       2. A section element with id sec11; add class "alt" to alternate the
+          background (sec10 is alt, so sec11 should be plain). NOTE: the
+          class is "alt", not "alt-band" -- there is no .alt-band rule.
+       3. Inside: div.container, div.section-num "11 · Title", then an h2.
+       4. Add a matching nav chip (href #sec11) to the .secnav above.
      ======================================================================== -->
 
 <!-- ========== FOOTER ========== -->
