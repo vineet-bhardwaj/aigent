@@ -1151,6 +1151,8 @@
   .topic-tag.state { color:var(--azure-600); background:rgba(46,111,242,0.1); }
   .topic-card h4 { font-family:var(--display); font-size:15px; color:var(--navy-deep); margin-bottom:6px; }
   .topic-card p { font-size:13px; color:var(--ink-soft); margin:0; line-height:1.5; }
+  .topic-card .src { display:inline-block; margin-top:10px; font-family:var(--mono); font-size:10px; letter-spacing:0.04em; text-transform:uppercase; color:var(--azure-600); text-decoration:none; border-bottom:1px solid rgba(46,111,242,0.3); }
+  .topic-card .src:hover { border-bottom-color:var(--azure-600); }
 
   .spon-group { margin:20px 0; }
   .spon-group h3 { display:flex; align-items:center; gap:8px; }
@@ -1169,6 +1171,27 @@
   .caution-box { background:var(--gold-soft); border:1px solid rgba(242,163,60,0.4); border-radius:12px; padding:16px 20px; margin:18px 0; }
   .caution-box strong { color:#8A6420; }
   .caution-box p { font-size:13.5px; color:var(--ink-soft); margin:6px 0 0; line-height:1.55; }
+
+  /* ========== SECTION NAV (sticky, prominent) ========== */
+  /* Sticks directly beneath the 33px confidential bar so both stay pinned. */
+  .secnav { position:sticky; top:33px; z-index:150; background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%); border-top:1px solid rgba(255,255,255,0.14); box-shadow:0 8px 20px -10px rgba(8,22,59,0.5); }
+  .secnav-inner { max-width:1000px; margin:0 auto; padding:13px 32px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .secnav-label { font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.6); font-weight:700; margin-right:10px; }
+  .secnav a { font-family:var(--mono); font-size:12px; letter-spacing:0.02em; color:rgba(255,255,255,0.94); text-decoration:none; padding:6px 12px; border:1px solid rgba(255,255,255,0.2); border-radius:8px; background:rgba(255,255,255,0.07); white-space:nowrap; transition:all .15s ease; }
+  .secnav a:hover { color:var(--navy); background:#fff; border-color:#fff; transform:translateY(-1px); }
+  .secnav a .n { color:var(--azure-400); font-weight:700; }
+  .secnav a:hover .n { color:var(--azure-600); }
+  html { scroll-behavior:smooth; }
+  section[id] { scroll-margin-top:92px; }   /* clear the confidential bar + sticky nav on jump */
+  /* On narrow screens the bar wraps to 48px; keep the nav one swipeable row. */
+  @media (max-width:760px){
+    .secnav { top:48px; }
+    .secnav-inner { flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding:10px 18px; gap:6px; }
+    .secnav-inner::-webkit-scrollbar { display:none; }
+    .secnav-label { position:sticky; left:0; }
+    .secnav a { font-size:11px; padding:5px 10px; }
+    section[id] { scroll-margin-top:104px; }
+  }
 
   /* ========== FOOTER ========== */
   footer {
@@ -1297,12 +1320,20 @@
   </div>
 </section>
 
+<!-- ========== SECTION NAV ========== -->
+<nav class="secnav">
+  <div class="secnav-inner">
+    <span class="secnav-label">Jump to</span>
+    <a href="#sec01"><span class="n">01</span> AI Ranking</a><a href="#sec02"><span class="n">02</span> Prompts</a><a href="#sec03"><span class="n">03</span> Score</a><a href="#sec04"><span class="n">04</span> Competitors</a><a href="#sec05"><span class="n">05</span> Action Plan</a><a href="#sec06"><span class="n">06</span> Referrals</a><a href="#sec07"><span class="n">07</span> Roadmap</a><a href="#sec08"><span class="n">08</span> Hot Topics</a><a href="#sec09"><span class="n">09</span> Sponsorships</a><a href="#sec10"><span class="n">10</span> Community</a>
+  </div>
+</nav>
+
 <!-- ========== SECTION 1: AI ENGINE RANKINGS ========== -->
-<section>
+<section id="sec01">
   <div class="container">
-    <div class="section-num">01 · AIgent Impact Ranking on Key AI Engines</div>
-    <h2>How you <em>rank across each AI engine</em> <span class="verified-tag">Measured</span></h2>
-    <p class="section-lede"><strong>Baseline measurement — July 22, 2026 run.</strong> We ran an 11-prompt corpus on each of three engines (ChatGPT, Gemini, Claude). The finding is stark: across 11 neutral local searches — the way a real Pilsen consumer asks, without naming you — you surfaced just once, and that lone mention flagged you as lower-rated than the alternatives. You are otherwise returned only when someone already knows your name. Perplexity was not part of this run.</p>
+    <div class="section-num">01 · How you rank across each AI engine</div>
+    <h2>AIgent Impact <em>Ranking on Key AI Engines</em> <span class="verified-tag">Measured</span></h2>
+    <p class="section-lede"><strong>Baseline measurement — July 2026 run.</strong> We ran an 11-prompt corpus on each of three engines (ChatGPT, Gemini, Claude). The finding is stark: across 11 neutral local searches — the way a real Pilsen consumer asks, without naming you — you surfaced just once, and that lone mention flagged you as lower-rated than the alternatives. You are otherwise returned only when someone already knows your name. Perplexity was not part of this run.</p>
 
     <div class="finding-banner">
       <div class="fb-num">1<small>of 11 neutral prompts</small></div>
@@ -1430,7 +1461,7 @@
 </section>
 
 <!-- ========== SECTION 2: PERFORMING PROMPTS ========== -->
-<section class="alt">
+<section class="alt" id="sec02">
   <div class="container">
     <div class="section-num">02 · Your Performing Prompts</div>
     <h2>What the engines <em>said instead of you</em> <span class="verified-tag">Measured · Jul 2026</span></h2>
@@ -1641,7 +1672,7 @@
 </section>
 
 <!-- ========== SECTION 3: CATEGORY SCORES ========== -->
-<section>
+<section id="sec03">
   <div class="container">
     <div class="section-num">03 · Score by Category</div>
     <h2>Your <em>29 points</em> broken down <span class="verified-tag">Measured · Jul 2026</span></h2>
@@ -1708,13 +1739,12 @@
       </div>
     </div>
 
-
     <p style="margin-top: 18px; font-size: 13px; color: var(--ink-soft);"><strong>Three honesty notes on this score.</strong> First, the <em>Reviews</em> parameter reflects the verified Google profile (3.9★ / 42) and the two Allstate pages (4.0★ / 350 and 3.8★ / 95) — the split is itself part of why this scores low, since Allstate is fragmenting the agent's own review signal across two profiles. Second, <em>Engagement</em> is low because the items that would lift it — local press, chamber membership, referral partnerships — could not be independently verified; if any are confirmed, the score would rise. Third, a note on tenure: the allstate.com badge stating "30+ Years in the Community" appears to describe the office location (a predecessor agent operated here), not Jose's own tenure — BBB records show the business started in 2019 — so we have not counted it toward the score.</p>
     </div>
 </section>
 
 <!-- ========== SECTION 4: KEY COMPETITORS ========== -->
-<section class="alt">
+<section class="alt" id="sec04">
   <div class="container">
     <div class="section-num">04 · Key Competitors in Your Market</div>
     <h2>Who's <em>winning AI search</em> here <span class="verified-tag">Measured · Ratings as Cited</span></h2>
@@ -1792,7 +1822,7 @@
 </section>
 
 <!-- ========== SECTION 5: ACTION PLAN BY CATEGORY ========== -->
-<section>
+<section id="sec05">
   <div class="container">
     <div class="section-num">05 · Your Action Plan</div>
     <h2>What to <em>work on next</em> <span class="verified-tag">Based on Measured Data</span></h2>
@@ -1927,11 +1957,11 @@
 </section>
 
 <!-- ========== SECTION 6: LOCAL BUSINESS OPPORTUNITIES ========== -->
-<section class="alt">
+<section class="alt" id="sec06">
   <div class="container">
     <div class="section-num">06 · Local Business Opportunities</div>
     <h2>Referral partners <em>right in your backyard</em> <span class="verified-tag">Real Businesses · Google-Verified</span></h2>
-    <p class="section-lede">Referral partnerships are a direct lever on the Engagement category (Referral Network scored 5/100 — none are currently visible online). Below are <strong>real, verified businesses</strong> near your office whose customers regularly need exactly what you sell — auto, home, renters, condo, and business policies. Names, addresses, phones, and ratings are confirmed via Google. The decision-maker contact is shown as a role to research; in a live engagement we identify the specific person before outreach.</p>
+    <p class="section-lede">Referral partnerships are a direct lever on the Engagement category (Referral Network scored 5/100 — none are currently visible online). Below are <strong>real, verified businesses</strong> near your office whose customers regularly need exactly what you sell — auto, home, renters, condo, and business policies — now spanning your core partners (dealers, realtors, lenders, property managers) plus the everyday businesses that create insurance moments (collision repair, movers, tax/notary offices). Names, addresses, phones, and ratings are confirmed via Google. The decision-maker contact is shown as a role to research; in a live engagement we identify the specific person before outreach.</p>
 
     <div class="opp-intro">
       <div class="opp-intro-text">
@@ -1939,7 +1969,7 @@
         <p>A single preferred-agent arrangement with a busy dealership, realtor, or lender can generate a steady stream of warm referrals. These are real businesses within a few miles of 1613 S Halsted St — a starting list to build on.</p>
       </div>
       <div class="opp-intro-stat">
-        <div class="big-num">9</div>
+        <div class="big-num">16</div>
         <div class="big-label">Verified Prospects</div>
       </div>
     </div>
@@ -2019,6 +2049,55 @@
             <td class="opp-addr">600 W Cermak Rd Ste 2A2, Chicago, IL 60616</td>
             <td class="opp-dist">4.4★ · 425</td>
           </tr>
+          <tr>
+            <td class="opp-biz"><strong>Tony's Auto Collision Center</strong><span class="opp-cat">Auto Body</span></td>
+            <td class="opp-person"><span class="opp-title">Owner / Manager</span></td>
+            <td class="opp-phone">(312) 225-6500</td>
+            <td class="opp-addr">2701 S Halsted St, Chicago, IL 60608</td>
+            <td class="opp-dist">4.7★ · 125</td>
+          </tr>
+          <tr>
+            <td class="opp-biz"><strong>Phil's Auto Body</strong><span class="opp-cat">Auto Body</span></td>
+            <td class="opp-person"><span class="opp-title">Owner (Phil)</span></td>
+            <td class="opp-phone">(773) 847-7156</td>
+            <td class="opp-addr">833 W 35th St, Chicago, IL 60609</td>
+            <td class="opp-dist">4.8★ · 112</td>
+          </tr>
+          <tr>
+            <td class="opp-biz"><strong>America's Income Tax Service</strong><span class="opp-cat">Tax / Accounting</span></td>
+            <td class="opp-person"><span class="opp-title">Owner (Arie)</span></td>
+            <td class="opp-phone">(773) 581-5100</td>
+            <td class="opp-addr">2022 S Ashland Ave, Chicago, IL 60608</td>
+            <td class="opp-dist">4.9★ · 231</td>
+          </tr>
+          <tr>
+            <td class="opp-biz"><strong>Taxes by Tanya</strong><span class="opp-cat">Tax / Accounting · bilingual</span></td>
+            <td class="opp-person"><span class="opp-title">Owner (Tanya)</span></td>
+            <td class="opp-phone">(708) 674-5911</td>
+            <td class="opp-addr">917 W 18th St, Chicago, IL 60608</td>
+            <td class="opp-dist">5.0★ · 105</td>
+          </tr>
+          <tr>
+            <td class="opp-biz"><strong>Bernard Movers</strong><span class="opp-cat">Moving</span></td>
+            <td class="opp-person"><span class="opp-title">Ops / Sales Manager</span></td>
+            <td class="opp-phone">(844) 205-9641</td>
+            <td class="opp-addr">2252 S Canal St, Chicago, IL 60616</td>
+            <td class="opp-dist">4.9★ · 196</td>
+          </tr>
+          <tr>
+            <td class="opp-biz"><strong>Fallen Movers</strong><span class="opp-cat">Moving</span></td>
+            <td class="opp-person"><span class="opp-title">Owner (Mike)</span></td>
+            <td class="opp-phone">(312) 469-9873</td>
+            <td class="opp-addr">Serves Lower West Side, Chicago</td>
+            <td class="opp-dist">5.0★ · 243</td>
+          </tr>
+          <tr>
+            <td class="opp-biz"><strong>La Oficina Services</strong><span class="opp-cat">Notary / Tax / Small-biz · bilingual</span></td>
+            <td class="opp-person"><span class="opp-title">Owner</span></td>
+            <td class="opp-phone">(312) 829-2410</td>
+            <td class="opp-addr">1340 W 18th St, Chicago, IL 60608</td>
+            <td class="opp-dist">5.0★ · 5</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -2029,7 +2108,7 @@
 </section>
 
 <!-- ========== SECTION 7: ROADMAP ========== -->
-<section>
+<section id="sec07">
   <div class="container">
     <div class="section-num">07 · Your 90-Day Roadmap</div>
     <h2>A <em>sequenced path</em>, not just a list <span class="verified-tag">Built From Section 05</span></h2>
@@ -2058,7 +2137,7 @@
         <div class="rm-when">Phase 3 · Days 46–90 · Growth</div>
         <div class="rm-title">Establish local presence &amp; partners</div>
         <ul class="rm-list">
-          <li>Open 2–3 referral conversations from the network list in Section 11 (dealers, realtors, lenders).</li>
+          <li>Open 2–3 referral conversations from the verified network list in Section 06 (dealers, realtors, lenders).</li>
           <li>Sponsor or show up at one local event (see Section 09) and document it online.</li>
           <li>Re-run the 11-prompt AI test to measure movement against this baseline.</li>
         </ul>
@@ -2068,7 +2147,7 @@
 </section>
 
 <!-- ========== SECTION 8: HOT TOPICS ========== -->
-<section class="alt">
+<section class="alt" id="sec08">
   <div class="container">
     <div class="section-num">08 · Hot Topics to Talk About Now</div>
     <h2>What Pilsen is <em>actually talking about</em> <span class="verified-tag">Sourced · Jul 2026</span></h2>
@@ -2078,32 +2157,38 @@
       <div class="topic-card">
         <span class="topic-tag state">Illinois</span>
         <h4>New insurance rate-review law</h4>
-        <p>Illinois passed landmark legislation (May 2026) letting the state review and reject excessive auto and home rate hikes — the first such authority since 1971. A natural "what this means for you" explainer for clients.</p>
+        <p>Illinois passed landmark legislation (May 2026, effective July 2027) letting the state review and reject excessive auto and home rate hikes — its first such authority since 1971. A natural "what this means for you" explainer for clients.</p>
+        <a class="src" href="https://www.insurancejournal.com/news/midwest/2026/05/29/871854.htm" target="_blank" rel="noopener">Source: Insurance Journal</a>
       </div>
       <div class="topic-card">
         <span class="topic-tag state">Illinois</span>
         <h4>Home premiums up ~50% since 2021</h4>
         <p>Illinois homeowner premiums rose about 50% from 2021–2024, second-highest in the nation. Directly addresses the price complaints showing up in your own reviews.</p>
+        <a class="src" href="https://www.yahoo.com/news/illinois-homeowners-insurance-premiums-50-171900879.html" target="_blank" rel="noopener">Source: Chicago Tribune (via Yahoo)</a>
       </div>
       <div class="topic-card">
         <span class="topic-tag local">Pilsen</span>
         <h4>Aging housing stock &amp; coverage gaps</h4>
         <p>Nearly 60% of Pilsen homes were built before 1940 — old wiring, plumbing, and roofs raise real coverage questions (water backup, replacement cost). A strong homeowner-education angle.</p>
+        <a class="src" href="https://www.newamerica.org/insights/sustaining-affordable-rents/" target="_blank" rel="noopener">Source: New America</a>
       </div>
       <div class="topic-card">
         <span class="topic-tag local">Pilsen</span>
         <h4>Gentrification, rising taxes &amp; renters</h4>
         <p>Pilsen's rapid change is pushing up property taxes and reshaping the rental market — relevant for landlord, renters, and condo (HO-6) coverage conversations with longtime residents.</p>
+        <a class="src" href="https://www.newamerica.org/insights/sustaining-affordable-rents/" target="_blank" rel="noopener">Source: New America</a>
       </div>
       <div class="topic-card">
         <span class="topic-tag local">Chicago</span>
         <h4>Small-business owner protection</h4>
-        <p>Local Hispanic-business support efforts have been active in the news. A bilingual "protecting your small business" piece speaks directly to Pilsen's commercial corridor and your business-insurance line.</p>
+        <p>The Illinois Hispanic Chamber has run legal-advice sessions for immigrant business owners — a timely hook for a bilingual "protecting your small business" piece speaking to Pilsen's commercial corridor and your business-insurance line.</p>
+        <a class="src" href="https://abc7chicago.com/post/chicago-leaders-speak-undocumented-business-owners-deportations-illinois-hispanic-chamber-commerce-offers-legal-adivce/15926782/" target="_blank" rel="noopener">Source: ABC7 Chicago</a>
       </div>
       <div class="topic-card">
         <span class="topic-tag state">Illinois</span>
         <h4>Credit score &amp; ZIP in auto pricing</h4>
         <p>How Illinois lets insurers use credit and ZIP code to price auto coverage — now under new state review. A transparent explainer builds trust with price-sensitive shoppers.</p>
+        <a class="src" href="https://www.liveinsurancenews.com/illinois-new-insurance-law/8570704/" target="_blank" rel="noopener">Source: Live Insurance News</a>
       </div>
     </div>
     <p style="font-size:12px;color:var(--ink-mute);margin-top:8px;"><em>Topics compiled from sourced July 2026 research. Verify specifics and dates before publishing, as fast-moving stories change.</em></p>
@@ -2111,11 +2196,11 @@
 </section>
 
 <!-- ========== SECTION 9: SPONSORSHIP OPPORTUNITIES ========== -->
-<section>
+<section id="sec09">
   <div class="container">
     <div class="section-num">09 · Sponsorship Opportunities</div>
     <h2>Where to <em>show up locally</em> <span class="verified-tag">Real Orgs &amp; Events</span></h2>
-    <p class="section-lede">Sponsorship is the most authentic way to build the community presence that Engagement (scored 12/100) is missing — and, unlike a social-media post, it's a documentable, AI-readable local signal. These are real Pilsen-area organizations, events, and outlets; confirm current sponsorship terms directly, as tiers and dates change.</p>
+    <p class="section-lede">Sponsorship is the most authentic way to build the community presence that Engagement (scored 12/100) is missing — and, unlike a social-media post, it's a documentable, AI-readable local signal. These are real Pilsen-area organizations, outlets, and upcoming events (next ~6 months); confirm current sponsorship terms directly, as tiers and dates change. Recurring events that have already passed this year are omitted and will return in the next cycle.</p>
 
     <div class="spon-group">
       <h3><span class="dot" style="background:var(--navy)"></span>Clubs &amp; community organizations</h3>
@@ -2123,10 +2208,10 @@
         <table class="spon-table">
           <thead><tr><th>Organization</th><th>Focus</th><th>Contact</th></tr></thead>
           <tbody>
-            <tr><td class="spon-name">Pilsen Neighbors Community Council<small>Founded 1954</small></td><td>Education, housing, immigration; organizes Fiesta del Sol</td><td class="spon-contact">info@pilsenneighbors.org · (312) 666-2663</td></tr>
-            <tr><td class="spon-name">Pilsen Alliance<small>Grassroots</small></td><td>Social justice &amp; community leadership</td><td class="spon-contact">via Facebook /thepilsenalliance</td></tr>
-            <tr><td class="spon-name">Pilsen Wellness Center<small>Founded 1975</small></td><td>Health &amp; education, Pilsen + Little Village</td><td class="spon-contact">See org website</td></tr>
-            <tr><td class="spon-name">Alivio Medical Center<small>Community health</small></td><td>Sponsors Fiesta del Sol health campaign</td><td class="spon-contact">Via fiestadelsol.org</td></tr>
+            <tr><td class="spon-name"><a href="https://pilsenneighbors.org/" target="_blank" rel="noopener">Pilsen Neighbors Community Council</a><small>Founded 1954</small></td><td>Education, housing, immigration; organizes Fiesta del Sol</td><td class="spon-contact">info@pilsenneighbors.org · (312) 666-2663</td></tr>
+            <tr><td class="spon-name"><a href="https://www.thepilsenalliance.org/" target="_blank" rel="noopener">Pilsen Alliance</a><small>Grassroots</small></td><td>Social justice &amp; community leadership</td><td class="spon-contact"><a href="https://www.thepilsenalliance.org/" target="_blank" rel="noopener">thepilsenalliance.org</a></td></tr>
+            <tr><td class="spon-name"><a href="https://www.pilsenwellnesscenter.org/en" target="_blank" rel="noopener">Pilsen Wellness Center</a><small>Founded 1975</small></td><td>Health &amp; education, Pilsen + Little Village</td><td class="spon-contact"><a href="https://www.pilsenwellnesscenter.org/en" target="_blank" rel="noopener">pilsenwellnesscenter.org</a></td></tr>
+            <tr><td class="spon-name"><a href="https://alivio.org/" target="_blank" rel="noopener">Alivio Medical Center</a><small>Community health</small></td><td>Sponsors Fiesta del Sol health campaign</td><td class="spon-contact"><a href="https://alivio.org/about/" target="_blank" rel="noopener">alivio.org</a> · (773) 254-1400</td></tr>
           </tbody>
         </table>
       </div>
@@ -2138,11 +2223,8 @@
         <table class="spon-table">
           <thead><tr><th>Event</th><th>When</th><th>Organizer / contact</th></tr></thead>
           <tbody>
-            <tr><td class="spon-name">Fiesta del Sol<small>~1M attendees · Pilsen's signature event</small></td><td class="spon-when">Late July</td><td class="spon-contact">Pilsen Neighbors · non-alcohol sponsors sought</td></tr>
-            <tr><td class="spon-name">Tacos y Tamales Festival<small>Food festival</small></td><td class="spon-when">July</td><td class="spon-contact">See ChooseChicago event listing</td></tr>
-            <tr><td class="spon-name">Fiesta Back of the Yards<small>Adjacent Latino audience</small></td><td class="spon-when">June</td><td class="spon-contact">Neighborhood council</td></tr>
-            <tr><td class="spon-name">Via Crucis (Good Friday procession)<small>Since 1977 · 18th St</small></td><td class="spon-when">Good Friday</td><td class="spon-contact">Local parish organizers</td></tr>
-            <tr><td class="spon-name">Maxwell Street Market<small>Historic market</small></td><td class="spon-when">Select Sundays</td><td class="spon-contact">City of Chicago / DCASE</td></tr>
+            <tr><td class="spon-name"><a href="https://fiestadelsol.org/" target="_blank" rel="noopener">Fiesta del Sol</a><small>~1M attendees · Pilsen's signature event</small></td><td class="spon-when">Jul 23–26, 2026</td><td class="spon-contact"><a href="https://fiestadelsol.org/participate" target="_blank" rel="noopener">Sponsor / participate</a> · no alcohol/tobacco sponsors (insurance welcome)</td></tr>
+            <tr><td class="spon-name"><a href="https://www.chicago.gov/city/en/depts/dca/supp_info/maxwell_street_market.html" target="_blank" rel="noopener">Maxwell Street Market</a><small>Historic market · city-run</small></td><td class="spon-when">Sundays May–Oct</td><td class="spon-contact"><a href="https://www.chicago.gov/city/en/depts/dca/supp_info/maxwell_street_market.html" target="_blank" rel="noopener">DCASE corporate partnerships</a></td></tr>
           </tbody>
         </table>
       </div>
@@ -2154,10 +2236,10 @@
         <table class="spon-table">
           <thead><tr><th>Outlet</th><th>Coverage</th><th>Note</th></tr></thead>
           <tbody>
-            <tr><td class="spon-name">Block Club Chicago<small>140k+ subscribers</small></td><td>Nonprofit, dedicated Pilsen/Little Village vertical</td><td class="spon-contact">Accepts sponsorship/underwriting</td></tr>
-            <tr><td class="spon-name">Lawndale News<small>Bilingual</small></td><td>English/Spanish, serves West Side incl. Pilsen</td><td class="spon-contact">Print + digital ads</td></tr>
-            <tr><td class="spon-name">La Raza<small>Spanish-language</small></td><td>Long-running Chicago Latino newspaper</td><td class="spon-contact">Display advertising</td></tr>
-            <tr><td class="spon-name">Cicero Independiente<small>Bilingual, independent</small></td><td>Cicero/Berwyn (adjacent to Little Village)</td><td class="spon-contact">Community-partnership sponsorships</td></tr>
+            <tr><td class="spon-name"><a href="https://blockclubchicago.org/" target="_blank" rel="noopener">Block Club Chicago</a><small>140k+ subscribers</small></td><td>Nonprofit, dedicated Pilsen/Little Village vertical</td><td class="spon-contact"><a href="https://blockclubchicago.org/advertise/" target="_blank" rel="noopener">Advertise / underwrite</a></td></tr>
+            <tr><td class="spon-name"><a href="http://www.lawndalenews.com/" target="_blank" rel="noopener">Lawndale News</a><small>Bilingual</small></td><td>English/Spanish, serves West Side incl. Pilsen</td><td class="spon-contact">Print + digital ads — call the office (no online ads page)</td></tr>
+            <tr><td class="spon-name"><a href="https://laraza.com/" target="_blank" rel="noopener">La Raza</a><small>Spanish-language</small></td><td>Long-running Chicago Latino newspaper</td><td class="spon-contact">Display advertising via Chicago office</td></tr>
+            <tr><td class="spon-name"><a href="https://www.ciceroindependiente.com/" target="_blank" rel="noopener">Cicero Independiente</a><small>Bilingual, independent</small></td><td>Cicero/Berwyn (adjacent to Little Village)</td><td class="spon-contact">Nonprofit — <a href="https://donorbox.org/cicero-independiente" target="_blank" rel="noopener">support/underwrite</a> (not ad buys)</td></tr>
           </tbody>
         </table>
       </div>
@@ -2167,7 +2249,7 @@
 </section>
 
 <!-- ========== SECTION 10: COMMUNITY GROUPS ========== -->
-<section class="alt">
+<section class="alt" id="sec10">
   <div class="container">
     <div class="section-num">10 · Community Groups Online</div>
     <h2>Where to <em>show up authentically</em> <span class="verified-tag">Researched</span></h2>
@@ -2182,61 +2264,28 @@
       <table class="spon-table">
         <thead><tr><th>Group</th><th>Platform · size</th><th>Self-promo?</th></tr></thead>
         <tbody>
-          <tr><td class="spon-name">Pilsen Community</td><td>Facebook · ~35,000</td><td class="spon-contact">Interest/lifestyle — participate, don't pitch</td></tr>
-          <tr><td class="spon-name">Pilsen's Neighborhood Watch Coalition</td><td>Facebook · ~12,500</td><td class="spon-contact">Safety-focused — self-promo inappropriate</td></tr>
-          <tr><td class="spon-name">Pilsen Neighborhood</td><td>Facebook · ~6,600</td><td class="spon-contact"><span style="color:var(--red);font-weight:600;">Politics only — no business posts</span></td></tr>
-          <tr><td class="spon-name">Fiesta del Sol</td><td>Facebook · ~24,000</td><td class="spon-contact">Event page — engage via sponsorship (Sec. 09)</td></tr>
-          <tr><td class="spon-name">Nextdoor — Pilsen / Lower West Side</td><td>Nextdoor · n/a</td><td class="spon-contact">Claim a business page; sponsored posts available in-app</td></tr>
+          <tr><td class="spon-name"><a href="https://www.facebook.com/p/Pilsen-Community-100064380233845/" target="_blank" rel="noopener">Pilsen Community</a></td><td>Facebook page · ~35,000</td><td class="spon-contact">Interest/lifestyle page — follow &amp; engage, outsiders can't post to timeline</td></tr>
+          <tr><td class="spon-name"><a href="https://www.facebook.com/Pilsenwatchcommittee/" target="_blank" rel="noopener">Pilsen's Neighborhood Watch Coalition</a></td><td>Facebook page · ~12,500</td><td class="spon-contact">Safety / CAPS-focused — self-promo inappropriate</td></tr>
+          <tr><td class="spon-name"><a href="https://www.facebook.com/Pilsen18th/" target="_blank" rel="noopener">Pilsen Neighborhood</a></td><td>Facebook page</td><td class="spon-contact"><span style="color:var(--red);font-weight:600;">"Only politics of Pilsen" — no business posts</span></td></tr>
+          <tr><td class="spon-name"><a href="https://www.facebook.com/FiestaDelSolChi/" target="_blank" rel="noopener">Fiesta del Sol</a></td><td>Facebook page · ~24,000</td><td class="spon-contact">Event page — engage via sponsorship (Sec. 09)</td></tr>
+          <tr><td class="spon-name"><a href="https://nextdoor.com/neighborhood/pilsenchi--chicago--il/" target="_blank" rel="noopener">Nextdoor — Pilsen</a></td><td>Nextdoor · 3 area zones</td><td class="spon-contact">No business page yet — set one up at <a href="https://business.nextdoor.com/" target="_blank" rel="noopener">business.nextdoor.com</a> (Local Deals / sponsored posts)</td></tr>
         </tbody>
       </table>
     </div>
-    <p style="font-size:12px;color:var(--ink-mute);margin-top:8px;"><em>Member counts approximate, from July 2026 research. Private buy/sell and parents' groups exist but don't surface publicly — a resident account is needed to find and vet them. Jose does not currently have a Nextdoor business page.</em></p>
-  </div>
-</section>
-
-<!-- ========== SECTION 11: EXPANDED NETWORK ========== -->
-<section>
-  <div class="container">
-    <div class="section-num">11 · Expanded Referral Network</div>
-    <h2>More partners <em>right in your backyard</em> <span class="verified-tag">Google-Verified</span></h2>
-    <p class="section-lede">A broader set of verified Pilsen-area businesses whose customers need exactly what you sell — expanding on the core four categories with the everyday businesses that generate insurance moments (a repair after a claim, a move, a new business filing). All names, addresses, phones, and ratings are Google-confirmed; the contact is a role to research. Low-rated businesses were excluded.</p>
-
-    <div class="spon-table-wrap">
-      <table class="spon-table">
-        <thead><tr><th>Business</th><th>Category · ask for</th><th>Phone</th><th>Rating</th></tr></thead>
-        <tbody>
-          <tr><td class="spon-name">Tony's Auto Collision Center<small>2701 S Halsted St</small></td><td class="spon-contact">Auto body · Owner/Manager</td><td class="spon-contact">(312) 225-6500</td><td class="spon-when" style="color:var(--green)">4.7★ · 125</td></tr>
-          <tr><td class="spon-name">Phil's Auto Body<small>833 W 35th St</small></td><td class="spon-contact">Auto body · Owner (Phil)</td><td class="spon-contact">(773) 847-7156</td><td class="spon-when" style="color:var(--green)">4.8★ · 112</td></tr>
-          <tr><td class="spon-name">America's Income Tax Service<small>2022 S Ashland Ave · Pilsen</small></td><td class="spon-contact">Tax/accounting · Owner (Arie)</td><td class="spon-contact">(773) 581-5100</td><td class="spon-when" style="color:var(--green)">4.9★ · 231</td></tr>
-          <tr><td class="spon-name">Taxes by Tanya<small>917 W 18th St · bilingual</small></td><td class="spon-contact">Tax/accounting · Owner (Tanya)</td><td class="spon-contact">(708) 674-5911</td><td class="spon-when" style="color:var(--green)">5.0★ · 105</td></tr>
-          <tr><td class="spon-name">Bernard Movers<small>2252 S Canal St</small></td><td class="spon-contact">Moving · Ops/Sales Manager</td><td class="spon-contact">(844) 205-9641</td><td class="spon-when" style="color:var(--green)">4.9★ · 196</td></tr>
-          <tr><td class="spon-name">Fallen Movers<small>Serves Lower West Side</small></td><td class="spon-contact">Moving · Owner (Mike)</td><td class="spon-contact">(312) 469-9873</td><td class="spon-when" style="color:var(--green)">5.0★ · 243</td></tr>
-          <tr><td class="spon-name">La Oficina Services<small>1340 W 18th St · bilingual</small></td><td class="spon-contact">Notary/tax/small-biz · Owner</td><td class="spon-contact">(312) 829-2410</td><td class="spon-when" style="color:var(--green)">5.0★ · 5</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p style="font-size:12px;color:var(--ink-mute);margin-top:8px;"><em>Verified via Google Places, July 2026. Combine with the core auto/realty/mortgage/property-management list in Section 06 for the full outreach set. Confirm the specific contact person on the first call.</em></p>
+    <p style="font-size:12px;color:var(--ink-mute);margin-top:8px;"><em>Sizes approximate, from July 2026 research. All four Facebook properties are <strong>pages, not groups</strong>, so outsiders can't post to their timelines — build presence by following, engaging, and sponsoring the orgs behind them, not by posting ads. Unlike some agents, Jose has <strong>no existing Nextdoor business page</strong>, so that's a build-from-scratch step rather than a claim. Private buy/sell and parents' groups exist but need a resident account to find and vet.</em></p>
   </div>
 </section>
 
 <!-- ========================================================================
      ADD NEW SECTIONS HERE
 
-     Copy the pattern of any section above. Each one is self-contained:
-
-       1. Banner comment:  SECTION 12: YOUR TITLE
-       2. A section element, with class "alt" to alternate the background.
-          Sections alternate plain / alt -- section 11 is plain, so the
-          next one should be "alt". NOTE: the class is "alt", not
-          "alt-band" -- there is no .alt-band rule in the stylesheet.
-       3. Inside it: div.container, then div.section-num reading
-          "12 · Title", then an h2 (wrap key words in em for the accent).
-
-     All component classes are already in the stylesheet and need no CSS
-     changes: hero-card, engines-grid, category-grid, compete-table,
-     action-category, opp-table, prompts-table, index-summary,
-     finding-banner, roadmap, topic-grid, spon-table, caution-box,
-     plus the tag/pill helpers (verified-tag, status-pill, volume-tag).
+     Copy the pattern of any section above. Each is self-contained:
+       1. Banner comment reading  SECTION 11: YOUR TITLE
+       2. A section element with id sec11; add class "alt" to alternate the
+          background (sec10 is alt, so sec11 should be plain). NOTE: the
+          class is "alt", not "alt-band" -- there is no .alt-band rule.
+       3. Inside: div.container, div.section-num "11 · Title", then an h2.
+       4. Add a matching nav chip (href #sec11) to the .secnav above.
      ======================================================================== -->
 
 <!-- ========== FOOTER ========== -->
@@ -2244,7 +2293,7 @@
   <div class="container">
     <div class="ftitle">AIgent Impact</div>
     <p>Monthly Report for Jose De Santiago · Allstate Insurance · Chicago IL (Pilsen)</p>
-    <p style="margin-top: 4px; color: #8A8275; font-size: 12px;">AI visibility measured July 22, 2026 across ChatGPT, Gemini, and Claude · Prepared by Xeno Media · Baseline measurement</p>
+    <p style="margin-top: 4px; color: #8A8275; font-size: 12px;">AI visibility measured July 2026 across ChatGPT, Gemini, and Claude · Prepared by Xeno Media · Baseline measurement</p>
   </div>
 </footer>
 
